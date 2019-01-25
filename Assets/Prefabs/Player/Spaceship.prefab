@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 552823191}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -7.13, z: 0}
-  m_LocalScale: {x: 3.07, y: 13.35, z: 1}
+  m_LocalPosition: {x: 0, y: -5.42, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.45, z: 1}
   m_Children: []
   m_Father: {fileID: 372659067534080101}
   m_RootOrder: 1
@@ -67,9 +67,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f461a459796474641b0d75bafcfe6607, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 7f8fc2edb731e194ab8c467f2a32193f, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.9098039}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -127,7 +127,11 @@ MonoBehaviour:
   heightOffset: 10
   lerpSpeed: 2.5
   spriteHalo: {fileID: 552823193}
-  speedPickUp: 5
+  speedPickUp: 2
+  spriteSpaceshipFull: {fileID: 21300000, guid: 7d15c6cfb07f11a458f575572f2b4cde,
+    type: 3}
+  spriteSpaceship: {fileID: 1459369692319970873}
+  timeFlyAway: 5
 --- !u!1 &4792427839371339985
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,9 +199,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 150eeddf8dc6499478b3cd69b430649d, type: 3}
-  m_Color: {r: 0, g: 0.7156651, b: 1, a: 1}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 21300000, guid: ab990a8611a720b4d9081b5c775b0e6b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

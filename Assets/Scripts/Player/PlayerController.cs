@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Spine.Unity;
 using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
+using WaitForSeconds = UnityEngine.WaitForSeconds;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     bool movementLock = false;
 
+    float timeLock = -1;
+
     void Start()
     {
         skeleton = GetComponentInChildren<SkeletonAnimation>();
@@ -26,7 +29,17 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
-        if (movementLock) return;
+        if (movementLock) {
+            if (timeLock != -1) {
+                timeLock -= Time.deltaTime;
+
+                if (timeLock < 0) {
+                    movementLock = false;
+                    boxCollider.enabled = true;
+                }
+            }
+            return;
+        }
 
         //Input for movement
         movementDirection.x = Input.GetAxis("Horizontal");
@@ -74,8 +87,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Lock()
+    public void PlayGrabAnimation()
     {
+        StartCoroutine(waitBeforeAnimation());
+    }
+
+    IEnumerator waitBeforeAnimation()
+    {
+        yield return new WaitForSeconds(0.75f);
+        skeleton.transform.localScale = new Vector3(1, 1, 1);
+        Lock(2);
+        skeleton.AnimationName = "take_object";
+    }
+
+    public void Lock(int time = -1)
+    {
+        timeLock = time;
         skeleton.AnimationName = "idle";
         body.velocity = Vector2.zero;
         movementLock = true;

@@ -36,6 +36,7 @@ public class OverworldManager : GameManager
 
             spaceship.GrabObject(pickableObject);
             pickableObject.Grab();
+            player.PlayGrabAnimation();
 
             grabbedObject++;
             dynamicText.text = grabbedObject.ToString();
