@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OverworldManager : GameManager
 {
@@ -37,7 +38,7 @@ public class OverworldManager : GameManager
             dynamicText.text = grabbedObject.ToString();
 
             if (grabbedObject == MAXIMUM_OBJECT_ON_SPACESHIP) {
-                Debug.Log("end game");
+                spaceship.MustGrabPlayer();
             }
         }
     }
@@ -47,10 +48,20 @@ public class OverworldManager : GameManager
         pickableObject = o;
     }
 
-    public void RemovePickableObjet(PickableObject o)
+    public void RemovePickableObject(PickableObject o)
     {
         if (pickableObject == o) {
             pickableObject = null;
         }
+    }
+
+    public void LockPlayer()
+    {
+        player.Lock();
+    }
+
+    public void PlayerPickedUp()
+    {
+        SceneManager.LoadScene("Hub");
     }
 }

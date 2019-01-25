@@ -38,7 +38,7 @@ public class PickableObject : MonoBehaviour
     void OnTriggerExit2D(Collider2D other)
     {
         if (!other.CompareTag("Player") && !grabbed) return;
-        OverworldManager.Instance.RemovePickableObjet(this);
+        OverworldManager.Instance.RemovePickableObject(this);
         playerCanGrab = false;
         dynamicText.text = "";
     }

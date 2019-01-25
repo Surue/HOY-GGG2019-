@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D body;
     Vector2 movementDirection;
 
+    bool movementLock = false;
+
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
@@ -19,6 +21,8 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
+        if (movementLock) return;
+
         //Input for movement
         movementDirection.x = Input.GetAxis("Horizontal");
         movementDirection.y = Input.GetAxis("Vertical");
@@ -33,5 +37,10 @@ public class PlayerController : MonoBehaviour
         //Movement
         body.velocity = movementDirection * movementSpeed;
         movementDirection = Vector2.zero;
+    }
+
+    public void Lock()
+    {
+        movementLock = true;
     }
 }

@@ -15,11 +15,14 @@ public class Spaceship : MonoBehaviour
 
     List<PickableObject> objectsToGrab;
 
+    bool mustGrabPlayer = false;
+
     enum State
     {
         FOLLOW_PLAYER,
         GOES_TO_OBJECT,
-        PICK_UP_OBJECT
+        PICK_UP_OBJECT,
+        PICK_UP_PLAYER
     }
 
     State state = State.FOLLOW_PLAYER;
@@ -39,6 +42,12 @@ public class Spaceship : MonoBehaviour
     {
         switch (state) {
             case State.FOLLOW_PLAYER: {
+                if (mustGrabPlayer && (transform.position.x - objectToFollow.transform.position.x) < 0.5f) {
+                    state = State.PICK_UP_PLAYER;
+                    spriteHalo.color = new Color(1, 1, 1, 0.5f);
+                    OverworldManager.Instance.LockPlayer();
+                }
+
                 Vector2 desiredPosition = new Vector2(objectToFollow.transform.position.x,
                     objectToFollow.transform.position.y + heightOffset);
                 transform.position = Vector2.Lerp(transform.position, desiredPosition, Time.deltaTime * lerpSpeed);
@@ -73,6 +82,13 @@ public class Spaceship : MonoBehaviour
                     objectToFollow.position += Vector3.up * Time.deltaTime * speedPickUp;
                 }
                 break;
+            case State.PICK_UP_PLAYER:
+                if((transform.position.y - objectToFollow.transform.position.y) < 0.5f) {
+                    OverworldManager.Instance.PlayerPickedUp();
+                } else {
+                    objectToFollow.position += Vector3.up * Time.deltaTime * speedPickUp;
+                }
+                break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
@@ -81,5 +97,10 @@ public class Spaceship : MonoBehaviour
     public void GrabObject(PickableObject o)
     {
         objectsToGrab.Add(o);
+    }
+
+    public void MustGrabPlayer()
+    {
+        mustGrabPlayer = true;
     }
 }
