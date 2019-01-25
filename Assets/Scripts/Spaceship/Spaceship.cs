@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,17 +11,22 @@ public class Spaceship : MonoBehaviour
 
     [SerializeField] SpriteRenderer spriteHalo;
     [SerializeField] float speedPickUp = 5;
+    [SerializeField] Sprite spriteSpaceshipFull;
+    [SerializeField] SpriteRenderer spriteSpaceship;
 
     List<PickableObject> objectsToGrab;
 
     bool mustGrabPlayer = false;
+
+    [SerializeField] float timeFlyAway = 5;
 
     enum State
     {
         FOLLOW_PLAYER,
         GOES_TO_OBJECT,
         PICK_UP_OBJECT,
-        PICK_UP_PLAYER
+        PICK_UP_PLAYER,
+        FLY_AWAY
     }
 
     State state = State.FOLLOW_PLAYER;
@@ -86,10 +90,24 @@ public class Spaceship : MonoBehaviour
                 break;
             case State.PICK_UP_PLAYER:
                 if(Vector2.Distance(transform.position, objectToFollow.position) < 1f) {
-                    OverworldManager.Instance.PlayerPickedUp();
+                    state = State.FLY_AWAY;
+                    OverworldManager.Instance.CameraSetObjectToFollow(transform);
+                    spriteSpaceship.sprite = spriteSpaceshipFull;
+                    objectToFollow.parent = transform;
+                    spriteHalo.color = new Color(1, 1, 1, 0);
                 } else {
                     objectToFollow.position = Vector3.Lerp(objectToFollow.position, transform.position, Time.deltaTime * speedPickUp);
                 }
+                break;
+            case State.FLY_AWAY:
+                transform.position += (Vector3)(Vector2.one * speedPickUp * 5 * Time.deltaTime);
+                transform.localScale =
+                    Vector3.Lerp(transform.localScale, new Vector3(0.2f, 0.2f, 0.2f), Time.deltaTime);
+                timeFlyAway -= Time.deltaTime;
+                if (timeFlyAway < 0) {
+                    OverworldManager.Instance.PlayerPickedUp();
+                }
+
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

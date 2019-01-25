@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Cinemachine;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,8 @@ public class OverworldManager : GameManager
     [SerializeField] TextMeshProUGUI dynamicText;
     [SerializeField] PlayerController player;
     [SerializeField] Spaceship spaceship;
+    [SerializeField] CinemachineVirtualCamera cameraOverworld;
+
     const int MAXIMUM_OBJECT_ON_SPACESHIP = 3;
 
     public static OverworldManager Instance => (OverworldManager)_instance;
@@ -63,5 +66,10 @@ public class OverworldManager : GameManager
     public void PlayerPickedUp()
     {
         SceneManager.LoadScene("Hub");
+    }
+
+    public void CameraSetObjectToFollow(Transform t)
+    {
+        cameraOverworld.Follow = t;
     }
 }
