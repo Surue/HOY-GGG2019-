@@ -19,14 +19,15 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
+        //Input for movement
         movementDirection.x = Input.GetAxis("Horizontal");
         movementDirection.y = Input.GetAxis("Vertical");
     }
 
     void FixedUpdate()
     {
+        //Movement
         body.velocity = movementDirection * movementSpeed;
-        Debug.Log(body.velocity);
         movementDirection = Vector2.zero;
     }
 }
