@@ -1,6 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
+[ExecuteInEditMode]
 [RequireComponent(typeof(SpriteRenderer))]
 public class PickableObject : MonoBehaviour
 {
