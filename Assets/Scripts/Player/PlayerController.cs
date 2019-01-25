@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour
         //Input for movement
         movementDirection.x = Input.GetAxis("Horizontal");
         movementDirection.y = Input.GetAxis("Vertical");
+
+        if (Input.GetButtonDown("Fire1")) {
+            OverworldManager.Instance.GrabObject();
+        }
     }
 
     void FixedUpdate()
