@@ -44,7 +44,7 @@ public class Spaceship : MonoBehaviour
             case State.FOLLOW_PLAYER: {
                 if (mustGrabPlayer && Vector2.Distance(transform.position, objectToFollow.position + Vector3.up * heightOffset) < 1f) {
                     state = State.PICK_UP_PLAYER;
-                    spriteHalo.color = new Color(1, 1, 1, 0.5f);
+                    spriteHalo.color = new Color(1, 1, 1, 0.9f);
                     OverworldManager.Instance.LockPlayer();
                 }
 
@@ -62,7 +62,7 @@ public class Spaceship : MonoBehaviour
             case State.GOES_TO_OBJECT: {
                 if (Vector2.Distance(transform.position, objectToFollow.position + Vector3.up * heightOffset) < 1f) {
                     state = State.PICK_UP_OBJECT;
-                    spriteHalo.color = new Color(1, 1, 1, 0.5f);
+                    spriteHalo.color = new Color(1, 1, 1, 0.9f);
                 } else {
                     Vector2 desiredPosition = new Vector2(objectToFollow.transform.position.x,
                         objectToFollow.transform.position.y + heightOffset);
@@ -104,5 +104,6 @@ public class Spaceship : MonoBehaviour
     public void MustGrabPlayer()
     {
         mustGrabPlayer = true;
+        speedPickUp++;
     }
 }
