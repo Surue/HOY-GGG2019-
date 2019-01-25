@@ -10,6 +10,7 @@ public class PickableObject : MonoBehaviour
     [SerializeField] string textToDisplay = "Pick up";
 
     bool playerCanGrab = false;
+    bool grabbed = false;
 
     SpriteRenderer spriteRenderer;
 
@@ -28,16 +29,16 @@ public class PickableObject : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Player")) return;
-
+        if (!other.CompareTag("Player") && !grabbed) return;
+        OverworldManager.Instance.SetPickableObject(this);
         playerCanGrab = true;
         dynamicText.text = textToDisplay;
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (!other.CompareTag("Player")) return;
-
+        if (!other.CompareTag("Player") && !grabbed) return;
+        OverworldManager.Instance.RemovePickableObjet(this);
         playerCanGrab = false;
         dynamicText.text = "";
     }
@@ -45,5 +46,11 @@ public class PickableObject : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, 1);
+    }
+
+    public void Grab()
+    {
+        dynamicText.text = "";
+        grabbed = true;
     }
 }

@@ -1,22 +1,85 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Spaceship : MonoBehaviour
 {
     //Object to follow
-    [SerializeField] Transform objectToFollow;
+    Transform objectToFollow;
     [SerializeField] float heightOffset = 10;
     [SerializeField] float lerpSpeed = 5;
-    
+
+    [SerializeField] SpriteRenderer spriteHalo;
+    [SerializeField] float speedPickUp = 5;
+
+    List<PickableObject> objectsToGrab;
+
+    enum State
+    {
+        FOLLOW_PLAYER,
+        GOES_TO_OBJECT,
+        PICK_UP_OBJECT
+    }
+
+    State state = State.FOLLOW_PLAYER;
+
     void Start()
     {
-        transform.position = new Vector2(objectToFollow.transform.position.x, objectToFollow.transform.position.y + heightOffset);
+        objectToFollow = OverworldManager.Player.transform;
+
+        transform.position = new Vector2(objectToFollow.transform.position.x,
+            objectToFollow.transform.position.y + heightOffset);
+        spriteHalo.color = new Color(1, 1, 1, 0);
+
+        objectsToGrab = new List<PickableObject>();
     }
-    
+
     void Update()
     {
-        Vector2 desiredPosition = new Vector2(objectToFollow.transform.position.x, objectToFollow.transform.position.y + heightOffset);
-        transform.position = Vector2.Lerp(transform.position, desiredPosition, Time.deltaTime * lerpSpeed);
+        switch (state) {
+            case State.FOLLOW_PLAYER: {
+                Vector2 desiredPosition = new Vector2(objectToFollow.transform.position.x,
+                    objectToFollow.transform.position.y + heightOffset);
+                transform.position = Vector2.Lerp(transform.position, desiredPosition, Time.deltaTime * lerpSpeed);
+
+                if (objectsToGrab.Count > 0) {
+                    state = State.GOES_TO_OBJECT;
+                    objectToFollow = objectsToGrab[0].transform;
+                    objectsToGrab.RemoveAt(0);
+                }
+            }
+                break;
+            case State.GOES_TO_OBJECT: {
+                if (Mathf.Abs(transform.position.x - objectToFollow.transform.position.x) < 0.5f) {
+                    state = State.PICK_UP_OBJECT;
+                    spriteHalo.color = new Color(1, 1, 1, 0.5f);
+                } else {
+                    Vector2 desiredPosition = new Vector2(objectToFollow.transform.position.x,
+                        objectToFollow.transform.position.y + heightOffset);
+                    transform.position = Vector2.Lerp(transform.position, desiredPosition, Time.deltaTime * lerpSpeed);
+                }
+            }
+                break;
+            case State.PICK_UP_OBJECT:
+                if ((transform.position.y - objectToFollow.transform.position.y) < 0.5f) {
+                    Destroy(objectToFollow.gameObject);
+
+                    objectToFollow = OverworldManager.Player.transform;
+
+                    spriteHalo.color = new Color(1, 1, 1, 0);
+                    state = State.FOLLOW_PLAYER;
+                } else {
+                    objectToFollow.position += Vector3.up * Time.deltaTime * speedPickUp;
+                }
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+
+    public void GrabObject(PickableObject o)
+    {
+        objectsToGrab.Add(o);
     }
 }

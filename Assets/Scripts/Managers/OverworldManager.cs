@@ -10,7 +10,11 @@ public class OverworldManager : GameManager
 
     public static OverworldManager Instance => (OverworldManager)_instance;
 
+    public static PlayerController Player => Instance.player;
+
     int grabbedObject = 0;
+
+    PickableObject pickableObject;
     
     void Start()
     {
@@ -24,11 +28,29 @@ public class OverworldManager : GameManager
 
     public void GrabObject()
     {
-        grabbedObject++;
-        dynamicText.text = grabbedObject.ToString();
+        if (pickableObject) {
 
-        if (grabbedObject == MAXIMUM_OBJECT_ON_SPACESHIP) {
-            Debug.Log("end game");
+            spaceship.GrabObject(pickableObject);
+            pickableObject.Grab();
+
+            grabbedObject++;
+            dynamicText.text = grabbedObject.ToString();
+
+            if (grabbedObject == MAXIMUM_OBJECT_ON_SPACESHIP) {
+                Debug.Log("end game");
+            }
+        }
+    }
+
+    public void SetPickableObject(PickableObject o)
+    {
+        pickableObject = o;
+    }
+
+    public void RemovePickableObjet(PickableObject o)
+    {
+        if (pickableObject == o) {
+            pickableObject = null;
         }
     }
 }
