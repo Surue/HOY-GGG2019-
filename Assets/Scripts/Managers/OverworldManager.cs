@@ -1,28 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
-public class OverworldManager : MonoBehaviour
+public class OverworldManager : GameManager
 {
     [SerializeField] TextMeshProUGUI dynamicText;
     [SerializeField] PlayerController player;
     [SerializeField] Spaceship spaceship;
     const int MAXIMUM_OBJECT_ON_SPACESHIP = 3;
 
-    static OverworldManager _instance = null;
-
     public static OverworldManager Instance => (OverworldManager)_instance;
 
     int grabbedObject = 0;
-
-    void Awake() {
-        _instance = this;
-    }
-
-    void OnDestroy() {
-        _instance = null;
-    }
     
     void Start()
     {
