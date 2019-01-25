@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D body;
     Vector2 movementDirection;
+    Collider2D boxCollider;
 
     bool movementLock = false;
 
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     {
         skeleton = GetComponentInChildren<SkeletonAnimation>();
         body = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
     }
     
     void Update()
@@ -74,6 +76,9 @@ public class PlayerController : MonoBehaviour
 
     public void Lock()
     {
+        skeleton.AnimationName = "idle";
+        body.velocity = Vector2.zero;
         movementLock = true;
+        boxCollider.enabled = false;
     }
 }

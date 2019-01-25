@@ -29,7 +29,7 @@ public class OverworldManager : GameManager
 
     public void GrabObject()
     {
-        if (pickableObject) {
+        if (pickableObject && grabbedObject < MAXIMUM_OBJECT_ON_SPACESHIP) {
 
             spaceship.GrabObject(pickableObject);
             pickableObject.Grab();

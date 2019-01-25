@@ -42,7 +42,7 @@ public class Spaceship : MonoBehaviour
     {
         switch (state) {
             case State.FOLLOW_PLAYER: {
-                if (mustGrabPlayer && (transform.position.x - objectToFollow.transform.position.x) < 0.5f) {
+                if (mustGrabPlayer && Vector2.Distance(transform.position, objectToFollow.position + Vector3.up * heightOffset) < 1f) {
                     state = State.PICK_UP_PLAYER;
                     spriteHalo.color = new Color(1, 1, 1, 0.5f);
                     OverworldManager.Instance.LockPlayer();
@@ -60,7 +60,7 @@ public class Spaceship : MonoBehaviour
             }
                 break;
             case State.GOES_TO_OBJECT: {
-                if (Mathf.Abs(transform.position.x - objectToFollow.transform.position.x) < 0.5f) {
+                if (Vector2.Distance(transform.position, objectToFollow.position + Vector3.up * heightOffset) < 1f) {
                     state = State.PICK_UP_OBJECT;
                     spriteHalo.color = new Color(1, 1, 1, 0.5f);
                 } else {
@@ -71,7 +71,7 @@ public class Spaceship : MonoBehaviour
             }
                 break;
             case State.PICK_UP_OBJECT:
-                if ((transform.position.y - objectToFollow.transform.position.y) < 0.5f) {
+                if (Vector2.Distance(transform.position, objectToFollow.position) < 1f) {
                     Destroy(objectToFollow.gameObject);
 
                     objectToFollow = OverworldManager.Player.transform;
@@ -79,14 +79,16 @@ public class Spaceship : MonoBehaviour
                     spriteHalo.color = new Color(1, 1, 1, 0);
                     state = State.FOLLOW_PLAYER;
                 } else {
-                    objectToFollow.position += Vector3.up * Time.deltaTime * speedPickUp;
+                    objectToFollow.position = Vector3.Lerp(objectToFollow.position, transform.position, Time.deltaTime * speedPickUp);
+                    objectToFollow.localScale = Vector3.Lerp(objectToFollow.localScale, new Vector3(0.1f, 0.1f, 0.1f),
+                        Time.deltaTime * speedPickUp);
                 }
                 break;
             case State.PICK_UP_PLAYER:
-                if((transform.position.y - objectToFollow.transform.position.y) < 0.5f) {
+                if(Vector2.Distance(transform.position, objectToFollow.position) < 1f) {
                     OverworldManager.Instance.PlayerPickedUp();
                 } else {
-                    objectToFollow.position += Vector3.up * Time.deltaTime * speedPickUp;
+                    objectToFollow.position = Vector3.Lerp(objectToFollow.position, transform.position, Time.deltaTime * speedPickUp);
                 }
                 break;
             default:
