@@ -6,84 +6,126 @@ filter: Linear,Linear
 repeat: none
 arm_left
   rotate: false
-  xy: 121, 91
+  xy: 299, 306
   size: 31, 46
   orig: 31, 46
   offset: 0, 0
   index: -1
 body_front
   rotate: false
-  xy: 180, 359
+  xy: 180, 237
+  size: 88, 59
+  orig: 88, 59
+  offset: 0, 0
+  index: -1
+body_profile
+  rotate: false
+  xy: 2, 74
+  size: 68, 59
+  orig: 68, 59
+  offset: 0, 0
+  index: -1
+bodyback
+  rotate: false
+  xy: 353, 395
   size: 88, 59
   orig: 88, 59
   offset: 0, 0
   index: -1
 cheeks_fron
   rotate: false
-  xy: 180, 466
+  xy: 2, 177
   size: 152, 29
   orig: 152, 29
   offset: 0, 0
   index: -1
+cheeks_profile
+  rotate: true
+  xy: 472, 460
+  size: 40, 30
+  orig: 40, 30
+  offset: 0, 0
+  index: -1
 closed_eye_front
   rotate: false
-  xy: 2, 41
+  xy: 2, 135
   size: 108, 40
   orig: 108, 40
   offset: 0, 0
   index: -1
-controle
+closed_eye_profile
   rotate: false
-  xy: 2, 286
-  size: 176, 209
-  orig: 176, 209
+  xy: 156, 191
+  size: 20, 15
+  orig: 20, 15
+  offset: 0, 0
+  index: -1
+eye_profile
+  rotate: false
+  xy: 112, 140
+  size: 32, 35
+  orig: 32, 35
   offset: 0, 0
   index: -1
 eyes_angry_front
   rotate: false
-  xy: 180, 420
+  xy: 353, 456
   size: 117, 44
   orig: 117, 44
   offset: 0, 0
   index: -1
 eyes_front
   rotate: false
-  xy: 2, 83
+  xy: 180, 298
   size: 117, 54
   orig: 117, 54
   offset: 0, 0
   index: -1
 head_front
   rotate: false
-  xy: 2, 139
+  xy: 2, 355
+  size: 176, 145
+  orig: 176, 145
+  offset: 0, 0
+  index: -1
+head_profile
+  rotate: false
+  xy: 180, 354
+  size: 171, 146
+  orig: 171, 146
+  offset: 0, 0
+  index: -1
+headback
+  rotate: false
+  xy: 2, 208
   size: 176, 145
   orig: 176, 145
   offset: 0, 0
   index: -1
 leg
   rotate: true
-  xy: 334, 480
+  xy: 180, 220
   size: 15, 51
   orig: 15, 51
   offset: 0, 0
   index: -1
 mouth_closedfront
   rotate: false
-  xy: 180, 327
+  xy: 2, 42
   size: 66, 30
   orig: 66, 30
   offset: 0, 0
   index: -1
 mouth_open
   rotate: false
-  xy: 2, 2
+  xy: 353, 356
   size: 66, 37
   orig: 66, 37
   offset: 0, 0
   index: -1
 tit
   rotate: false
-  xy: 299, 452
+  xy: 270, 284
   size: 15, 12
   orig: 15, 12
   offset: 0, 0
