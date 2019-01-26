@@ -151,6 +151,8 @@ public class PlacementGrid : MonoBehaviour
             }
 
             ghostObject.transform.position = offsetGrid + new Vector2(posX, posY);
+        } else {
+            canPlace = false;
         }
 
         if (!Input.GetButtonDown("Fire1") || !canPlace) return;

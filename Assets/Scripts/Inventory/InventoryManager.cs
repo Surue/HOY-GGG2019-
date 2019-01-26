@@ -47,6 +47,7 @@ public class InventoryManager : MonoBehaviour
     public void ObjectPlaced()
     {
         FindObjectOfType<InventoryInterface>().ObjectPlaced();
+        selectedObjectForPlacement = null;
     }
 
     public void PlaceObjectOnGrid(PickableObjectData d)
