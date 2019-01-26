@@ -61,6 +61,8 @@ public class PlayerController : MonoBehaviour
 
     void UpdateAnimation()
     {
+        skeleton.loop = true;
+
         skeleton.transform.localScale = new Vector3(1, 1, 1);
 
         if (Mathf.Abs(body.velocity.y) < 0.1f && Mathf.Abs(body.velocity.x) < 0.1f) {
@@ -96,7 +98,8 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.75f);
         skeleton.transform.localScale = new Vector3(1, 1, 1);
-        Lock(2);
+        Lock(1);
+        skeleton.loop = false;
         skeleton.AnimationName = "take_object";
     }
 

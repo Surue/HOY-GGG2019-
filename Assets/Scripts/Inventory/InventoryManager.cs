@@ -16,12 +16,13 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public List<PickableObjectData> pickedUpObject;
+    public List<PickableObjectData> pickedUpObject = new List<PickableObjectData>();
+
+    UIObjectSelection selectedObjectForPlacement;
 
     // Start is called before the first frame update
     void Start()
     {
-        pickedUpObject = new List<PickableObjectData>();
     }
 
     // Update is called once per frame
@@ -33,5 +34,13 @@ public class InventoryManager : MonoBehaviour
     public void AddObject(PickableObjectData p)
     {
         pickedUpObject.Add(p);
+    }
+
+    public void SetSelectedObject(UIObjectSelection p)
+    {
+        if(selectedObjectForPlacement)
+        selectedObjectForPlacement.UnselectObject();
+
+        selectedObjectForPlacement = p;
     }
 }
