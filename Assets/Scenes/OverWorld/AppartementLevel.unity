@@ -1912,6 +1912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickedUpObject: []
+  selectedObjectForPlacement: {fileID: 0}
 --- !u!4 &623632942
 Transform:
   m_ObjectHideFlags: 0
@@ -2465,6 +2466,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6475354478705331121, guid: 99a81e128485ffe438b179fd9c67b4e5,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475354478705331121, guid: 99a81e128485ffe438b179fd9c67b4e5,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6475354478840821962, guid: 99a81e128485ffe438b179fd9c67b4e5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2576,16 +2587,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6475354479629799547, guid: 99a81e128485ffe438b179fd9c67b4e5,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6475354478705331121, guid: 99a81e128485ffe438b179fd9c67b4e5,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6475354478705331121, guid: 99a81e128485ffe438b179fd9c67b4e5,
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
