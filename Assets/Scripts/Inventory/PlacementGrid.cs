@@ -153,6 +153,7 @@ public class PlacementGrid : MonoBehaviour
             ghostObject.transform.position = offsetGrid + new Vector2(posX, posY);
         } else {
             canPlace = false;
+            ghostObject.color = new Color(1, 1, 1, 0);
         }
 
         if (!Input.GetButtonDown("Fire1") || !canPlace) return;

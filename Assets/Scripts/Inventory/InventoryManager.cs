@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.PlayerLoop;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -28,7 +29,10 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetButtonDown("Fire2")) {
+            selectedObjectForPlacement.UnselectObject();
+            selectedObjectForPlacement = null;
+        }
     }
 
     public void AddObject(PickableObjectData p)
@@ -47,6 +51,7 @@ public class InventoryManager : MonoBehaviour
     public void ObjectPlaced()
     {
         FindObjectOfType<InventoryInterface>().ObjectPlaced();
+        selectedObjectForPlacement.UnselectObject();
         selectedObjectForPlacement = null;
     }
 
