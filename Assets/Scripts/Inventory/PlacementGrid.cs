@@ -304,6 +304,58 @@ public class PlacementGrid : MonoBehaviour
                     return true;
                 }
             }
+        } else if(size == new Vector2Int(2, 1)){
+            if(offDown) {
+                if(gridBools[indexX, indexY] || gridBools[indexX - 1, indexY]) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                if(gridBools[indexX, indexY] || gridBools[indexX + 1, indexY ]) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }else if (size == new Vector2Int(2, 2)) {
+            if(offLeft) {
+                if(gridBools[indexX, indexY] || gridBools[indexX, indexY - 1]) {
+                    return false;
+                } else {
+                    if(offDown) {
+                        if(gridBools[indexX - 1, indexY] || gridBools[indexX - 1, indexY - 1]) {
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    } else {
+                        if(gridBools[indexX + 1, indexY] || gridBools[indexX + 1, indexY - 1]) {
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    }
+                }
+            } else {
+                if(gridBools[indexX, indexY] || gridBools[indexX, indexY + 1]) {
+                    return false;
+                } else {
+                    if(offDown) {
+                        if(gridBools[indexX - 1, indexY] || gridBools[indexX - 1, indexY + 1]) {
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    } else {
+                        if(gridBools[indexX + 1, indexY] || gridBools[indexX + 1, indexY + 1]) {
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    }
+                }
+            }
         }
 
         return false;
