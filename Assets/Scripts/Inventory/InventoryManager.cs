@@ -18,7 +18,7 @@ public class InventoryManager : MonoBehaviour
 
     public List<PickableObjectData> pickedUpObject = new List<PickableObjectData>();
 
-    UIObjectSelection selectedObjectForPlacement;
+    public UIObjectSelection selectedObjectForPlacement;
 
     // Start is called before the first frame update
     void Start()

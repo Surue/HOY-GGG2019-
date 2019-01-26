@@ -283,3 +283,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overImage: {fileID: 611004150414671351}
   selectedImage: {fileID: 992726498}
+  pickableObjectData: {fileID: 0}
