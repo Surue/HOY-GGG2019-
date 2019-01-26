@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class OverworldManager : GameManager
 {
-    [SerializeField] TextMeshProUGUI dynamicText;
     [SerializeField] PlayerController player;
     [SerializeField] Spaceship spaceship;
     [SerializeField] CinemachineVirtualCamera cameraOverworld;
@@ -22,7 +21,6 @@ public class OverworldManager : GameManager
     
     void Start()
     {
-        dynamicText.text = "0";
 
         PickableObject[] pickableObjects = FindObjectsOfType<PickableObject>();
 
@@ -48,7 +46,6 @@ public class OverworldManager : GameManager
             player.PlayGrabAnimation();
 
             grabbedObject++;
-            dynamicText.text = grabbedObject.ToString();
 
             if (grabbedObject == MAXIMUM_OBJECT_ON_SPACESHIP) {
                 spaceship.MustGrabPlayer();

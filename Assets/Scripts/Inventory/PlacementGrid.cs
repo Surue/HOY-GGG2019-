@@ -361,6 +361,21 @@ public class PlacementGrid : MonoBehaviour
         return false;
     }
 
+    public List<Vector2Int> GetListFreeSpace()
+    {
+        List<Vector2Int> list = new List<Vector2Int>();
+
+        for (int i = 0; i < gridBools.GetLength(0); i++) {
+            for (int j = 0; j < gridBools.GetLength(1); j++) {
+                if (!gridBools[i, j]) {
+                    list.Add(new Vector2Int(i, j));
+                }
+            }
+        }
+
+        return list;
+    }
+
     void ShowGrid()
     {
         foreach (LineRenderer lineRenderer in linesHorizontal) {

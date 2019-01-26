@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Spine.Unity;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Spaceship : MonoBehaviour
 {
@@ -15,9 +16,18 @@ public class Spaceship : MonoBehaviour
     [SerializeField] Sprite spriteSpaceshipFull;
     [SerializeField] SpriteRenderer spriteSpaceship;
 
+    [Header("Sprite")]
+    [SerializeField] Sprite loaded0;
+    [SerializeField] Sprite loaded33;
+    [SerializeField] Sprite loaded66;
+    [SerializeField] Sprite loaded100;
+    [SerializeField] Image imageLoaded;
+
     List<PickableObject> objectsToGrab;
 
     bool mustGrabPlayer = false;
+
+    int objectGrabbed = 0;
 
     [SerializeField] float timeFlyAway = 5;
 
@@ -35,6 +45,9 @@ public class Spaceship : MonoBehaviour
 
     void Start()
     {
+        imageLoaded.sprite = loaded0;
+        imageLoaded.color = new Color(1, 1, 1, 0);
+
         objectToFollow = OverworldManager.Player.transform;
 
         transform.position = new Vector2(objectToFollow.transform.position.x,
@@ -56,6 +69,7 @@ public class Spaceship : MonoBehaviour
                     state = State.FOLLOW_PLAYER;
                     OverworldManager.Instance.UnlockPlayer();
                     spriteHalo.color = new Color(1, 1, 1, 0);
+                    imageLoaded.color = new Color(1, 1, 1, 1);
                 }
 
                 break;
@@ -100,6 +114,23 @@ public class Spaceship : MonoBehaviour
                     objectToFollow = OverworldManager.Player.transform;
 
                     spriteHalo.color = new Color(1, 1, 1, 0);
+
+                    objectGrabbed++;
+
+                    switch (objectGrabbed) {
+                        case 1:
+                            imageLoaded.sprite = loaded33;
+                            break;
+
+                        case 2:
+                            imageLoaded.sprite = loaded66;
+                            break;
+
+                        case 3:
+                            imageLoaded.sprite = loaded100;
+                            break;
+                    }
+
                     state = State.FOLLOW_PLAYER;
                 } else {
                     objectToFollow.position = Vector3.Lerp(objectToFollow.position, transform.position, Time.deltaTime * speedPickUp);
@@ -115,6 +146,7 @@ public class Spaceship : MonoBehaviour
                     objectToFollow.parent = transform;
                     spriteHalo.color = new Color(1, 1, 1, 0);
                     Destroy(objectToFollow.gameObject);
+                    imageLoaded.color = new Color(1, 1, 1, 0);
                 } else {
                     objectToFollow.position = Vector3.Lerp(objectToFollow.position, transform.position, Time.deltaTime * speedPickUp);
                 }
