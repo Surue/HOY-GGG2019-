@@ -131,7 +131,7 @@ MonoBehaviour:
   spriteSpaceshipFull: {fileID: 21300000, guid: 7d15c6cfb07f11a458f575572f2b4cde,
     type: 3}
   spriteSpaceship: {fileID: 1459369692319970873}
-  timeFlyAway: 5
+  timeFlyAway: 4
 --- !u!1 &4792427839371339985
 GameObject:
   m_ObjectHideFlags: 0
