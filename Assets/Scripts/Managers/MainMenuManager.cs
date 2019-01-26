@@ -46,7 +46,7 @@ public class MainMenuManager : GameManager
 
                 if (panelCredits.localPosition.x <= 0) {
                     panelCredits.localPosition = new Vector3(0, panelCredits.localPosition.y);
-                    panelMain.localPosition = new Vector3(-1024, panelMain.localPosition.y);
+                    panelMain.localPosition = new Vector3(-1920, panelMain.localPosition.y);
                     state = State.IDLE;
                 }
                 break;
@@ -55,7 +55,7 @@ public class MainMenuManager : GameManager
                 panelMain.position += Vector3.right * speedSwitchPanel;
 
                 if(panelMain.localPosition.x >= 0) {
-                    panelCredits.localPosition = new Vector3(1024, panelCredits.localPosition.y);
+                    panelCredits.localPosition = new Vector3(1920, panelCredits.localPosition.y);
                     panelMain.localPosition = new Vector3(0, panelMain.localPosition.y);
                     state = State.IDLE;
                 }

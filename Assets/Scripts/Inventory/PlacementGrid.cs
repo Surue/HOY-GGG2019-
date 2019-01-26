@@ -21,11 +21,17 @@ public class PlacementGrid : MonoBehaviour
     PointerEventData m_PointerEventData;
     [SerializeField] EventSystem m_EventSystem;
 
+    [SerializeField] bool defaultShowGrid = true;
+
     List<GameObject> placedObjects;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (!defaultShowGrid) {
+            materialLines = null;
+        }
+
         linesHorizontal = new List<LineRenderer>();
         linesVertical = new List<LineRenderer>();
 
@@ -69,6 +75,10 @@ public class PlacementGrid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!defaultShowGrid) {
+            return;
+        }
+
         #region Get position and offset
 
         Vector3 pos = Input.mousePosition;

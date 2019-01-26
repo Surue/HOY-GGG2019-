@@ -20,13 +20,7 @@ public class InventoryManager : MonoBehaviour
     public List<PickableObjectData> pickedUpObject = new List<PickableObjectData>();
 
     public UIObjectSelection selectedObjectForPlacement;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (Input.GetButtonDown("Fire2") && selectedObjectForPlacement) {

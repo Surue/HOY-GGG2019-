@@ -17,9 +17,13 @@ public class InventoryInterface : MonoBehaviour
     void Start()
     {
         //Get images
-        imageUp = panelUp.GetComponentsInChildren<UIObjectSelection>().Select(componentsInChild => componentsInChild.GetComponent<Image>()).ToArray();
+        if (panelUp) {
+            imageUp = panelUp.GetComponentsInChildren<UIObjectSelection>()
+                .Select(componentsInChild => componentsInChild.GetComponent<Image>()).ToArray();
 
-        imageDown = panelDown.GetComponentsInChildren<UIObjectSelection>().Select(componentsInChild => componentsInChild.GetComponent<Image>()).ToArray();
+            imageDown = panelDown.GetComponentsInChildren<UIObjectSelection>()
+                .Select(componentsInChild => componentsInChild.GetComponent<Image>()).ToArray();
+        }
 
         //Fill images
         int indexUp = 0;
@@ -29,6 +33,8 @@ public class InventoryInterface : MonoBehaviour
             if(pickableObjectData.isPlaced) {
                 InventoryManager.Instance.PlaceObjectOnGrid(pickableObjectData);
             }
+
+            if(imageUp != null)
 
             if (placeUp) {
                 imageUp[indexUp].sprite = pickableObjectData.sprite;
@@ -45,6 +51,10 @@ public class InventoryInterface : MonoBehaviour
             placeUp = !placeUp;
         }
 
+        if (imageUp == null) {
+            return;
+        }
+
         //Hide remaining sprite
         for (int i = indexUp; i < imageUp.Length; i++) {
             imageUp[i].color = new Color(1, 1, 1, 0);
@@ -55,12 +65,6 @@ public class InventoryInterface : MonoBehaviour
             imageDown[i].color = new Color(1, 1, 1, 0);
             Destroy(imageDown[i].gameObject);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void ObjectPlaced()

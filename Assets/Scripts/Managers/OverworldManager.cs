@@ -23,6 +23,14 @@ public class OverworldManager : GameManager
     void Start()
     {
         dynamicText.text = "0";
+
+        PickableObject[] pickableObjects = FindObjectsOfType<PickableObject>();
+
+        foreach (PickableObject o in pickableObjects) {
+            if (InventoryManager.Instance.pickedUpObject.Contains(o.pickableObjectData)) {
+                Destroy(o.gameObject);
+            }
+        }
     }
     
     void Update()
@@ -67,7 +75,7 @@ public class OverworldManager : GameManager
 
     public void PlayerPickedUp()
     {
-        SceneManager.LoadScene("Hub");
+        SceneManager.LoadScene("Home");
     }
 
     public void CameraSetObjectToFollow(Transform t)
