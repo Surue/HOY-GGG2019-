@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Spine.Unity;
 using UnityEngine;
 
 public class Spaceship : MonoBehaviour
@@ -80,6 +81,11 @@ public class Spaceship : MonoBehaviour
                 if (Vector2.Distance(transform.position, objectToFollow.position + Vector3.up * heightOffset) < 1f) {
                     state = State.PICK_UP_OBJECT;
                     spriteHalo.color = new Color(1, 1, 1, 0.9f);
+                    if (objectToFollow.gameObject.GetComponents<Collider2D>().Length > 0) {
+                        foreach (Collider2D component in objectToFollow.GetComponents<Collider2D>()) {
+                            component.enabled = false;
+                        }
+                    }
                 } else {
                     Vector2 desiredPosition = new Vector2(objectToFollow.transform.position.x,
                         objectToFollow.transform.position.y + heightOffset);
@@ -108,6 +114,7 @@ public class Spaceship : MonoBehaviour
                     spriteSpaceship.sprite = spriteSpaceshipFull;
                     objectToFollow.parent = transform;
                     spriteHalo.color = new Color(1, 1, 1, 0);
+                    Destroy(objectToFollow.gameObject);
                 } else {
                     objectToFollow.position = Vector3.Lerp(objectToFollow.position, transform.position, Time.deltaTime * speedPickUp);
                 }
