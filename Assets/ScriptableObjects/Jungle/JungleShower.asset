@@ -16,3 +16,9 @@ MonoBehaviour:
   size: {x: 1, y: 2}
   isPlaced: 0
   tileTaken: []
+  FunAmout: 3
+  RelaxingAmout: 0
+  WeirdAmout: 2
+  CleanAmout: 0.1
+  FoodAmout: 0
+  WorkAmout: 0
