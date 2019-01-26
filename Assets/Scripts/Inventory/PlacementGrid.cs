@@ -35,7 +35,7 @@ public class PlacementGrid : MonoBehaviour
         linesHorizontal = new List<LineRenderer>();
         linesVertical = new List<LineRenderer>();
 
-        gridBools = new bool[10, 10];
+        gridBools = new bool[10, 11];
 
         for (int i = 0; i < gridBools.GetLength(0); i++) {
             for (int j = 0; j < gridBools.GetLength(1); j++) {
@@ -43,7 +43,7 @@ public class PlacementGrid : MonoBehaviour
             }
         }
 
-        for (int i = 0; i <= gridBools.GetLength(0); i++) {
+        for (int i = 0; i <= gridBools.GetLength(1); i++) {
             GameObject newLine = new GameObject("Line");
             LineRenderer l = newLine.AddComponent<LineRenderer>();
             l.positionCount = 2;
@@ -56,12 +56,12 @@ public class PlacementGrid : MonoBehaviour
             linesHorizontal.Add(l);
         }
 
-        for (int j = 0; j <= gridBools.GetLength(1); j++) {
+        for (int j = 0; j <= gridBools.GetLength(0); j++) {
             GameObject newLine = new GameObject("Line");
             LineRenderer l = newLine.AddComponent<LineRenderer>();
             l.positionCount = 2;
             l.SetPosition(0, new Vector2(j * 2, 0) + offsetGrid);
-            l.SetPosition(1, new Vector2(j * 2, gridBools.GetLength(0) * 2) + offsetGrid);
+            l.SetPosition(1, new Vector2(j * 2, gridBools.GetLength(1) * 2) + offsetGrid);
             l.transform.SetParent(transform);
             l.sortingOrder = 2;
             l.material = materialLines;
@@ -90,11 +90,11 @@ public class PlacementGrid : MonoBehaviour
 
         int indexX = -1, indexY = -1;
         for (int i = 0; i < linesHorizontal.Count - 1; i++) {
-            if (!(pos.y > linesHorizontal[i].GetPosition(0).y) ||
-                !(pos.y <= linesHorizontal[i + 1].GetPosition(0).y)) continue;
+            if (!(pos.y > linesHorizontal[i].GetPosition(1).y) ||
+                !(pos.y <= linesHorizontal[i + 1].GetPosition(1).y)) continue;
             indexY = i;
 
-            if (pos.y > linesHorizontal[i].GetPosition(0).y + 1) {
+            if (pos.y > linesHorizontal[i].GetPosition(1).y + 1) {
                 cellOffsetLeft = false;
             }
 
@@ -298,7 +298,7 @@ public class PlacementGrid : MonoBehaviour
                     return true;
                 }
             } else {
-                if (gridBools[indexX, indexY] || indexY + 1 >= gridBools.GetLength(0) || gridBools[indexX, indexY + 1]) {
+                if (gridBools[indexX, indexY] || indexY + 1 >= gridBools.GetLength(1) || gridBools[indexX, indexY + 1]) {
                     return false;
                 } else {
                     return true;
@@ -338,7 +338,7 @@ public class PlacementGrid : MonoBehaviour
                     }
                 }
             } else {
-                if(gridBools[indexX, indexY] || indexY + 1 >= gridBools.GetLength(0) || gridBools[indexX, indexY + 1]) {
+                if(gridBools[indexX, indexY] || indexY + 1 >= gridBools.GetLength(1) || gridBools[indexX, indexY + 1]) {
                     return false;
                 } else {
                     if(offDown) {
