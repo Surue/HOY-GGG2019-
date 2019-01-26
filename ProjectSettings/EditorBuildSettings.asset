@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/OverWorld/DesertLevel.unity
     guid: 6542d6ca99ebce04291bdbba7870ea23
   - enabled: 1
+    path: Assets/Scenes/OverWorld/JungleLevel.unity
+    guid: f854c8e8ed832a044be868ed2d08e6ff
+  - enabled: 1
     path: Assets/Scenes/FinalView.unity
     guid: 43489f0e1f68ce148a1c90f5d6af9a57
   m_configObjects: {}
