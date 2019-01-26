@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         skeleton = GetComponentInChildren<SkeletonAnimation>();
         body = GetComponent<Rigidbody2D>();
-        boxCollider = GetComponent<BoxCollider2D>();
+        boxCollider = GetComponent<CircleCollider2D>();
     }
     
     void Update()
