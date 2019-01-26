@@ -26,6 +26,10 @@ public class InventoryInterface : MonoBehaviour
         int indexDown = 0;
 
         foreach (PickableObjectData pickableObjectData in InventoryManager.Instance.pickedUpObject) {
+            if(pickableObjectData.isPlaced) {
+                InventoryManager.Instance.PlaceObjectOnGrid(pickableObjectData);
+            }
+
             if (placeUp) {
                 imageUp[indexUp].sprite = pickableObjectData.sprite;
                 imageUp[indexUp].preserveAspect = true;
@@ -57,5 +61,22 @@ public class InventoryInterface : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void ObjectPlaced()
+    {
+        foreach (Image image in imageUp) {
+            if (image.GetComponent<UIObjectSelection>().pickableObjectData.isPlaced) {
+                image.GetComponent<UIObjectSelection>().SetPlaced();
+                break;
+            }
+        }
+
+        foreach(Image image in imageDown) {
+            if(image.GetComponent<UIObjectSelection>().pickableObjectData.isPlaced) {
+                image.GetComponent<UIObjectSelection>().SetPlaced();
+                break;
+            }
+        }
     }
 }

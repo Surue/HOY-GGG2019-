@@ -43,4 +43,14 @@ public class InventoryManager : MonoBehaviour
 
         selectedObjectForPlacement = p;
     }
+
+    public void ObjectPlaced()
+    {
+        FindObjectOfType<InventoryInterface>().ObjectPlaced();
+    }
+
+    public void PlaceObjectOnGrid(PickableObjectData d)
+    {
+        FindObjectOfType<PlacementGrid>().PlaceObjectOnGrid(d);
+    }
 }

@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Experimental.UIElements;
 using UnityEngine.UI;
 
 public class PlacementGrid : MonoBehaviour
@@ -180,41 +178,80 @@ public class PlacementGrid : MonoBehaviour
         Vector2Int size = InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.size;
 
         gridBools[indexX, indexY] = true;
+        InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.tileTaken.Add(new Vector2Int(indexX, indexY));
 
         if(size.x == 2) {
             if(offDown) {
                 gridBools[indexX - 1, indexY] = true;
-
+                InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.tileTaken.Add(new Vector2Int(indexX - 1, indexY));
                 if(size.y == 2) {
                     if(offLeft) {
                         gridBools[indexX, indexY - 1] = true;
                         gridBools[indexX - 1, indexY - 1] = true;
+                        InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.tileTaken.Add(new Vector2Int(indexX, indexY - 1));
+                        InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.tileTaken.Add(new Vector2Int(indexX - 1, indexY - 1));
                     } else {
                         gridBools[indexX, indexY + 1] = true;
                         gridBools[indexX - 1, indexY + 1] = true;
+                        InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.tileTaken.Add(new Vector2Int(indexX, indexY + 1));
+                        InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.tileTaken.Add(new Vector2Int(indexX - 1, indexY + 1));
                     }
                 }
             } else {
                 gridBools[indexX + 1, indexY] = true;
-
+                InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.tileTaken.Add(new Vector2Int(indexX + 1, indexY));
                 if(size.y == 2) {
                     if(offLeft) {
                         gridBools[indexX, indexY - 1] = true;
+                        InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.tileTaken.Add(new Vector2Int(indexX, indexY - 1));
+                        InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.tileTaken.Add(new Vector2Int(indexX + 1, indexY - 1));
                         gridBools[indexX + 1, indexY - 1] = true;
                     } else {
                         gridBools[indexX, indexY + 1] = true;
                         gridBools[indexX + 1, indexY + 1] = true;
+                        InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.tileTaken.Add(new Vector2Int(indexX, indexY + 1));
+                        InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.tileTaken.Add(new Vector2Int(indexX + 1, indexY + 1));
                     }
                 }
             }
         } else if(size.y == 2) {
             if(offLeft) {
                 gridBools[indexX, indexY - 1] = true;
+                InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.tileTaken.Add(new Vector2Int(indexX, indexY - 1));
             } else {
                 gridBools[indexX, indexY + 1] = true;
+                InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.tileTaken.Add(new Vector2Int(indexX, indexY + 1));
             }
         }
 
+        GameObject o = new GameObject {
+            name = InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.name
+        };
+        o.transform.position = ghostObject.transform.position;
+        o.AddComponent<SpriteRenderer>();
+        o.GetComponent<SpriteRenderer>().sprite = ghostObject.sprite;
+
+        InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.isPlaced = true;
+        InventoryManager.Instance.ObjectPlaced();
+    }
+
+    public void PlaceObjectOnGrid(PickableObjectData data)
+    {
+        Vector2 pos = Vector2.zero;
+        foreach (Vector2Int vector2Int in data.tileTaken) {
+            gridBools[vector2Int.x, vector2Int.y] = true;
+            pos += new Vector2(vector2Int.x * 2, vector2Int.y * 2);
+        }
+
+        pos /= data.tileTaken.Count;
+        pos += offsetGrid;
+
+        GameObject o = new GameObject {
+            name = data.name
+        };
+        o.transform.position = pos + Vector2.one;
+        o.AddComponent<SpriteRenderer>();
+        o.GetComponent<SpriteRenderer>().sprite = data.sprite;
     }
 
     bool TestIfFree(int indexX, int indexY, bool offDown, bool offLeft)

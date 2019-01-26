@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 826449cf6a19e0a48aa4987dd69d0eb4, type: 3}
   size: {x: 1, y: 2}
+  isPlaced: 0
+  tileTaken: []
