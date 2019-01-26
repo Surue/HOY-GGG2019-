@@ -4,5 +4,5 @@
 public class PickableObjectData : ScriptableObject
 {
     [SerializeField] public Sprite sprite;
-    [SerializeField] Vector2Int size;
+    [SerializeField] public Vector2Int size;
 }

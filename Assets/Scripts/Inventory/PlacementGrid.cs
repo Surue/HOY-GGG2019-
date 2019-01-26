@@ -17,7 +17,7 @@ public class PlacementGrid : MonoBehaviour
 
     bool gridDisplayed = false;
 
-    [SerializeField]SpriteRenderer ghostObject;
+    [SerializeField] SpriteRenderer ghostObject;
 
     [SerializeField] GraphicRaycaster m_Raycaster;
     PointerEventData m_PointerEventData;
@@ -50,7 +50,7 @@ public class PlacementGrid : MonoBehaviour
             linesHorizontal.Add(l);
         }
 
-        for(int j = 0;j <= gridBools.GetLength(1);j++) {
+        for (int j = 0; j <= gridBools.GetLength(1); j++) {
             GameObject newLine = new GameObject("Line");
             LineRenderer l = newLine.AddComponent<LineRenderer>();
             l.positionCount = 2;
@@ -67,71 +67,183 @@ public class PlacementGrid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        #region Get position and offset
+
         Vector3 pos = Input.mousePosition;
         pos.z = 20;
         pos = Camera.main.ScreenToWorldPoint(pos);
 
+        bool cellOffsetDown = true;
+        bool cellOffsetLeft = true;
+
         int indexX = -1, indexY = -1;
         for (int i = 0; i < linesHorizontal.Count - 1; i++) {
-            if (pos.y > linesHorizontal[i].GetPosition(0).y && pos.y <= linesHorizontal[i + 1].GetPosition(0).y) {
-                indexY = i;
+            if (!(pos.y > linesHorizontal[i].GetPosition(0).y) ||
+                !(pos.y <= linesHorizontal[i + 1].GetPosition(0).y)) continue;
+            indexY = i;
+
+            if (pos.y > linesHorizontal[i].GetPosition(0).y + 1) {
+                cellOffsetLeft = false;
             }
+
+            break;
         }
 
-        for(int i = 0;i < linesVertical.Count - 1;i++) {
-            if(pos.x > linesVertical[i].GetPosition(0).x && pos.x <= linesVertical[i + 1].GetPosition(0).x) {
-                indexX = i;
+        for (int i = 0; i < linesVertical.Count - 1; i++) {
+            if (!(pos.x > linesVertical[i].GetPosition(0).x) ||
+                !(pos.x <= linesVertical[i + 1].GetPosition(0).x)) continue;
+            indexX = i;
+
+            if (pos.x > linesVertical[i].GetPosition(0).x + 1) {
+                cellOffsetDown = false;
             }
+
+            break;
         }
 
         if (indexX < 0 || indexX > linesVertical.Count || indexY < 0 || indexY > linesHorizontal.Count) {
-            
-            if(gridDisplayed) {
-                HideGrid();
-                gridDisplayed = false;
+            if (!gridDisplayed) return;
+            HideGrid();
+            gridDisplayed = false;
 
-                ghostObject.color = new Color(1, 1, 1, 0);
-            }
+            ghostObject.color = new Color(1, 1, 1, 0);
             return;
         }
+
+        #endregion
 
         if (!gridDisplayed) {
             ShowGrid();
             gridDisplayed = true;
         }
 
+        #region Show ghost
+
+        Vector2Int size = Vector2Int.one;
+        bool canPlace = true;
+
+        //Show ghost
         if (InventoryManager.Instance.selectedObjectForPlacement) {
-            if (gridBools[indexX, indexY]) {
-                ghostObject.color = new Color(1, 0.1f, 0.1f, 1.0f);
-            } else {
+            size = InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.size;
+            if (TestIfFree(indexX, indexY, cellOffsetDown, cellOffsetLeft)) {
                 ghostObject.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-            }
-            ghostObject.sprite = InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.sprite;
-            ghostObject.transform.position = offsetGrid + new Vector2(indexX * 2 + 1, indexY * 2 + 1);
-        }
-
-        if (Input.GetButtonDown("Fire1")) {
-            bool canPlace = true;
-            
-            //Set up the new Pointer Event
-            m_PointerEventData = new PointerEventData(m_EventSystem);
-            //Set the Pointer Event Position to that of the mouse position
-            m_PointerEventData.position = Input.mousePosition;
-
-            //Create a list of Raycast Results
-            List<RaycastResult> results = new List<RaycastResult>();
-
-            //Raycast using the Graphics Raycaster and mouse click position
-            m_Raycaster.Raycast(m_PointerEventData, results);
-
-            //For every result returned, output the name of the GameObject on the Canvas hit by the Ray
-            if (results.Count > 0) {
+            } else {
                 canPlace = false;
+                ghostObject.color = new Color(1, 0.1f, 0.1f, 1.0f);
             }
 
-            if(canPlace)
-                gridBools[indexX, indexY] = true;
+            ghostObject.sprite = InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.sprite;
+
+            float posX = indexX * 2 + 1;
+            if (size.x == 2) {
+                if (cellOffsetDown) {
+                    posX += -1;
+                } else {
+                    posX += 1;
+                }
+            }
+
+            float posY = indexY * 2 + 1;
+            if (size.y == 2) {
+                if (cellOffsetLeft) {
+                    posY += -1;
+                } else {
+                    posY += 1;
+                }
+            }
+
+            ghostObject.transform.position = offsetGrid + new Vector2(posX, posY);
         }
+
+        if (!Input.GetButtonDown("Fire1") || !canPlace) return;
+        //Raycast to check if hit the UI
+        m_PointerEventData = new PointerEventData(m_EventSystem) {position = Input.mousePosition};
+
+        List<RaycastResult> results = new List<RaycastResult>();
+
+        m_Raycaster.Raycast(m_PointerEventData, results);
+
+        if (results.Count > 0) {
+            canPlace = false;
+        }
+
+        #endregion
+
+
+        //Lock place
+        if (!canPlace) return;
+        PlaceObject(indexX, indexY, cellOffsetDown, cellOffsetLeft);
+    }
+
+    void PlaceObject(int indexX, int indexY, bool offDown, bool offLeft)
+    {
+        Vector2Int size = InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.size;
+
+        gridBools[indexX, indexY] = true;
+
+        if(size.x == 2) {
+            if(offDown) {
+                gridBools[indexX - 1, indexY] = true;
+
+                if(size.y == 2) {
+                    if(offLeft) {
+                        gridBools[indexX, indexY - 1] = true;
+                        gridBools[indexX - 1, indexY - 1] = true;
+                    } else {
+                        gridBools[indexX, indexY + 1] = true;
+                        gridBools[indexX - 1, indexY + 1] = true;
+                    }
+                }
+            } else {
+                gridBools[indexX + 1, indexY] = true;
+
+                if(size.y == 2) {
+                    if(offLeft) {
+                        gridBools[indexX, indexY - 1] = true;
+                        gridBools[indexX + 1, indexY - 1] = true;
+                    } else {
+                        gridBools[indexX, indexY + 1] = true;
+                        gridBools[indexX + 1, indexY + 1] = true;
+                    }
+                }
+            }
+        } else if(size.y == 2) {
+            if(offLeft) {
+                gridBools[indexX, indexY - 1] = true;
+            } else {
+                gridBools[indexX, indexY + 1] = true;
+            }
+        }
+
+    }
+
+    bool TestIfFree(int indexX, int indexY, bool offDown, bool offLeft)
+    {
+        Vector2Int size = InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.size;
+
+        if (size == Vector2Int.one) {
+            if (gridBools[indexX, indexY]) {
+                return false;
+            } else {
+                return true;
+            }
+        } else if (size == new Vector2Int(1, 2)) {
+            if (offLeft) {
+                if (gridBools[indexX, indexY] || gridBools[indexX, indexY - 1]) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                if (gridBools[indexX, indexY] || gridBools[indexX, indexY + 1]) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     void ShowGrid()
@@ -147,11 +259,11 @@ public class PlacementGrid : MonoBehaviour
 
     void HideGrid()
     {
-        foreach(LineRenderer lineRenderer in linesHorizontal) {
+        foreach (LineRenderer lineRenderer in linesHorizontal) {
             lineRenderer.enabled = false;
         }
 
-        foreach(LineRenderer lineRenderer in linesVertical) {
+        foreach (LineRenderer lineRenderer in linesVertical) {
             lineRenderer.enabled = false;
         }
     }
