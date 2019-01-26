@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,9 @@ public class MainMenuManager : GameManager
 
     [SerializeField] RectTransform panelMain;
     [SerializeField] RectTransform panelCredits;
+
+    [SerializeField] float animationDuration = 1;
+    [SerializeField] string nextSceneName = "Hub";
 
     [SerializeField] float speedSwitchPanel = 5;
 
@@ -84,6 +88,17 @@ public class MainMenuManager : GameManager
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void StartGame()
+    {
+        StartCoroutine(WaitEndAnimation());
+    }
+
+    IEnumerator WaitEndAnimation() {
+        yield return new WaitForSeconds(animationDuration);
+
+        SceneManager.LoadScene(nextSceneName);
     }
 
     public void Quit()
