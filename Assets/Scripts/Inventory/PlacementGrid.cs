@@ -21,6 +21,8 @@ public class PlacementGrid : MonoBehaviour
     PointerEventData m_PointerEventData;
     [SerializeField] EventSystem m_EventSystem;
 
+    List<GameObject> placedObjects;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +62,8 @@ public class PlacementGrid : MonoBehaviour
             l.widthMultiplier = 0.05f;
             linesVertical.Add(l);
         }
+
+        placedObjects = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -154,6 +158,12 @@ public class PlacementGrid : MonoBehaviour
         } else {
             canPlace = false;
             ghostObject.color = new Color(1, 1, 1, 0);
+
+            if (Input.GetButtonDown("Fire2")) {
+                if (gridBools[indexX, indexY]) {
+                    InventoryManager.Instance.RemoveObjectAt(new Vector2Int(indexX, indexY));
+                }
+            }
         }
 
         if (!Input.GetButtonDown("Fire1") || !canPlace) return;
@@ -169,8 +179,7 @@ public class PlacementGrid : MonoBehaviour
         }
 
         #endregion
-
-
+        
         //Lock place
         if (!canPlace) return;
         PlaceObject(indexX, indexY, cellOffsetDown, cellOffsetLeft);
@@ -234,6 +243,8 @@ public class PlacementGrid : MonoBehaviour
         o.AddComponent<SpriteRenderer>();
         o.GetComponent<SpriteRenderer>().sprite = ghostObject.sprite;
 
+        placedObjects.Add(o);
+
         InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.isPlaced = true;
         InventoryManager.Instance.ObjectPlaced();
     }
@@ -255,6 +266,8 @@ public class PlacementGrid : MonoBehaviour
         o.transform.position = pos + Vector2.one;
         o.AddComponent<SpriteRenderer>();
         o.GetComponent<SpriteRenderer>().sprite = data.sprite;
+
+        placedObjects.Add(o);
     }
 
     bool TestIfFree(int indexX, int indexY, bool offDown, bool offLeft)
@@ -305,6 +318,21 @@ public class PlacementGrid : MonoBehaviour
 
         foreach (LineRenderer lineRenderer in linesVertical) {
             lineRenderer.enabled = false;
+        }
+    }
+
+    public void FreeSpaceFromObject(PickableObjectData d)
+    {
+        foreach (Vector2Int vector2Int in d.tileTaken) {
+            gridBools[vector2Int.x, vector2Int.y] = false;
+        }
+
+        foreach (GameObject placedObject in placedObjects) {
+            if (placedObject.GetComponent<SpriteRenderer>().sprite == d.sprite) {
+                Destroy(placedObject);
+                placedObjects.Remove(placedObject);
+                return;
+            }
         }
     }
 }

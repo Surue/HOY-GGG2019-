@@ -69,7 +69,6 @@ public class InventoryInterface : MonoBehaviour
             if(image != null)
             if (image.GetComponent<UIObjectSelection>().pickableObjectData.isPlaced) {
                 image.GetComponent<UIObjectSelection>().SetPlaced();
-                break;
             }
         }
 
@@ -77,8 +76,24 @@ public class InventoryInterface : MonoBehaviour
             if(image != null)
             if(image.GetComponent<UIObjectSelection>().pickableObjectData.isPlaced) {
                 image.GetComponent<UIObjectSelection>().SetPlaced();
-                break;
             }
+        }
+    }
+
+    public void RemoveObject()
+    {
+        foreach(Image image in imageUp) {
+            if(image != null)
+                if(!image.GetComponent<UIObjectSelection>().pickableObjectData.isPlaced) {
+                    image.GetComponent<UIObjectSelection>().Remove();
+                }
+        }
+
+        foreach(Image image in imageDown) {
+            if(image != null)
+                if(!image.GetComponent<UIObjectSelection>().pickableObjectData.isPlaced) {
+                    image.GetComponent<UIObjectSelection>().Remove();
+                }
         }
     }
 }

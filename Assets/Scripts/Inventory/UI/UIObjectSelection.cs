@@ -74,4 +74,12 @@ public class UIObjectSelection : MonoBehaviour, IPointerEnterHandler, IPointerEx
         selectedImage.color = new Color(1, 1, 1, 0);
         overImage.color = new Color(1, 1, 1, 0);
     }
+
+    public void Remove()
+    {
+        canBePlaced = true;
+        GetComponent<Image>().color = new Color(1f, 1f, 1f, 1);
+        selectedImage.color = new Color(1, 1, 1, 0);
+        overImage.color = new Color(1, 1, 1, 0);
+    }
 }

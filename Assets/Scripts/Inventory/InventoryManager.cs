@@ -29,7 +29,7 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire2")) {
+        if (Input.GetButtonDown("Fire2") && selectedObjectForPlacement) {
             selectedObjectForPlacement.UnselectObject();
             selectedObjectForPlacement = null;
         }
@@ -58,5 +58,24 @@ public class InventoryManager : MonoBehaviour
     public void PlaceObjectOnGrid(PickableObjectData d)
     {
         FindObjectOfType<PlacementGrid>().PlaceObjectOnGrid(d);
+    }
+
+    public void RemoveObjectAt(Vector2Int pos)
+    {
+        foreach (PickableObjectData pickableObjectData in pickedUpObject) {
+            if (!pickableObjectData.isPlaced) continue;
+
+            foreach (Vector2Int vector2Int in pickableObjectData.tileTaken) {
+                if (vector2Int != pos) continue;
+
+                FindObjectOfType<PlacementGrid>().FreeSpaceFromObject(pickableObjectData);
+
+                pickableObjectData.isPlaced = false;
+                pickableObjectData.tileTaken = new List<Vector2Int>();
+
+                FindObjectOfType<InventoryInterface>().RemoveObject();
+                return;
+            }
+        }
     }
 }
