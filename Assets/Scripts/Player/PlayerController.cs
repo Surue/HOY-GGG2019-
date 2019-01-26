@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         skeleton = GetComponentInChildren<SkeletonAnimation>();
         body = GetComponent<Rigidbody2D>();
-        boxCollider = GetComponent<CircleCollider2D>();
+        boxCollider = GetComponent<CapsuleCollider2D>();
     }
     
     void Update()
@@ -98,12 +98,12 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.75f);
         skeleton.transform.localScale = new Vector3(1, 1, 1);
-        Lock(1);
+        Lock(0.75f);
         skeleton.loop = false;
         skeleton.AnimationName = "take_object";
     }
 
-    public void Lock(int time = -1)
+    public void Lock(float time = -1)
     {
         timeLock = time;
         skeleton.AnimationName = "idle";

@@ -292,13 +292,13 @@ public class PlacementGrid : MonoBehaviour
             }
         } else if (size == new Vector2Int(1, 2)) {
             if (offLeft) {
-                if (gridBools[indexX, indexY] || gridBools[indexX, indexY - 1]) {
+                if (gridBools[indexX, indexY] || indexY - 1 < 0 || gridBools[indexX, indexY - 1]) {
                     return false;
                 } else {
                     return true;
                 }
             } else {
-                if (gridBools[indexX, indexY] || gridBools[indexX, indexY + 1]) {
+                if (gridBools[indexX, indexY] || indexY + 1 >= gridBools.GetLength(0) || gridBools[indexX, indexY + 1]) {
                     return false;
                 } else {
                     return true;
@@ -306,13 +306,13 @@ public class PlacementGrid : MonoBehaviour
             }
         } else if(size == new Vector2Int(2, 1)){
             if(offDown) {
-                if(gridBools[indexX, indexY] || gridBools[indexX - 1, indexY]) {
+                if(gridBools[indexX, indexY] || indexX - 1 < 0 || gridBools[indexX - 1, indexY]) {
                     return false;
                 } else {
                     return true;
                 }
             } else {
-                if(gridBools[indexX, indexY] || gridBools[indexX + 1, indexY ]) {
+                if(gridBools[indexX, indexY] || indexX + 1 >= gridBools.GetLength(0) || gridBools[indexX + 1, indexY ]) {
                     return false;
                 } else {
                     return true;
@@ -320,17 +320,17 @@ public class PlacementGrid : MonoBehaviour
             }
         }else if (size == new Vector2Int(2, 2)) {
             if(offLeft) {
-                if(gridBools[indexX, indexY] || gridBools[indexX, indexY - 1]) {
+                if(gridBools[indexX, indexY] || indexY - 1 < 0 || gridBools[indexX, indexY - 1]) {
                     return false;
                 } else {
                     if(offDown) {
-                        if(gridBools[indexX - 1, indexY] || gridBools[indexX - 1, indexY - 1]) {
+                        if(indexX - 1 < 0 || gridBools[indexX - 1, indexY] || gridBools[indexX - 1, indexY - 1]) {
                             return false;
                         } else {
                             return true;
                         }
                     } else {
-                        if(gridBools[indexX + 1, indexY] || gridBools[indexX + 1, indexY - 1]) {
+                        if(indexX + 1 >= gridBools.GetLength(0) || gridBools[indexX + 1, indexY] || gridBools[indexX + 1, indexY - 1]) {
                             return false;
                         } else {
                             return true;
@@ -338,17 +338,17 @@ public class PlacementGrid : MonoBehaviour
                     }
                 }
             } else {
-                if(gridBools[indexX, indexY] || gridBools[indexX, indexY + 1]) {
+                if(gridBools[indexX, indexY] || indexY + 1 >= gridBools.GetLength(0) || gridBools[indexX, indexY + 1]) {
                     return false;
                 } else {
                     if(offDown) {
-                        if(gridBools[indexX - 1, indexY] || gridBools[indexX - 1, indexY + 1]) {
+                        if(indexX - 1 < 0 || gridBools[indexX - 1, indexY] || gridBools[indexX - 1, indexY + 1]) {
                             return false;
                         } else {
                             return true;
                         }
                     } else {
-                        if(gridBools[indexX + 1, indexY] || gridBools[indexX + 1, indexY + 1]) {
+                        if(indexX + 1 >= gridBools.GetLength(0) || gridBools[indexX + 1, indexY] || gridBools[indexX + 1, indexY + 1]) {
                             return false;
                         } else {
                             return true;
