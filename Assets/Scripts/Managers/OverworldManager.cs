@@ -35,6 +35,7 @@ public class OverworldManager : GameManager
         if (pickableObject && grabbedObject < MAXIMUM_OBJECT_ON_SPACESHIP) {
 
             spaceship.GrabObject(pickableObject);
+            InventoryManager.Instance.AddObject(pickableObject.pickableObjectData);
             pickableObject.Grab();
             player.PlayGrabAnimation();
 

@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class PickableObject : MonoBehaviour
 {
-    [SerializeField] PickableObjectData pickableObjectData;
+    public PickableObjectData pickableObjectData;
 
     [SerializeField] TextMeshProUGUI dynamicText;
     [SerializeField] string textToDisplay = "Pick up";
