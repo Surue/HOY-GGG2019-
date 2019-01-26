@@ -73,6 +73,11 @@ public class OverworldManager : GameManager
         player.Lock();
     }
 
+    public void UnlockPlayer()
+    {
+        player.Unlock();
+    }
+
     public void PlayerPickedUp()
     {
         SceneManager.LoadScene("Home");

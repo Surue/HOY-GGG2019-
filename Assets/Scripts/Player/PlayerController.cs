@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Spine.Unity;
 using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
@@ -20,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
     float timeLock = -1;
 
-    void Start()
+    void Awake()
     {
         skeleton = GetComponentInChildren<SkeletonAnimation>();
         body = GetComponent<Rigidbody2D>();
@@ -110,5 +111,12 @@ public class PlayerController : MonoBehaviour
         body.velocity = Vector2.zero;
         movementLock = true;
         boxCollider.enabled = false;
+    }
+
+    public void Unlock()
+    {
+        movementLock = false;
+        boxCollider.enabled = true;
+        timeLock = -1;
     }
 }

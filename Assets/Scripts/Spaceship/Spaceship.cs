@@ -22,6 +22,7 @@ public class Spaceship : MonoBehaviour
 
     enum State
     {
+        DROP_PLAYER,
         FOLLOW_PLAYER,
         GOES_TO_OBJECT,
         PICK_UP_OBJECT,
@@ -29,7 +30,7 @@ public class Spaceship : MonoBehaviour
         FLY_AWAY
     }
 
-    State state = State.FOLLOW_PLAYER;
+    State state = State.DROP_PLAYER;
 
     void Start()
     {
@@ -37,14 +38,26 @@ public class Spaceship : MonoBehaviour
 
         transform.position = new Vector2(objectToFollow.transform.position.x,
             objectToFollow.transform.position.y + heightOffset);
-        spriteHalo.color = new Color(1, 1, 1, 0);
 
         objectsToGrab = new List<PickableObject>();
+
+        OverworldManager.Instance.LockPlayer();
+        objectToFollow.position = transform.position;
     }
 
     void Update()
     {
         switch (state) {
+            case State.DROP_PLAYER:
+                objectToFollow.position = Vector2.Lerp(objectToFollow.position, (Vector2)transform.position + Vector2.down * 10, Time.deltaTime * lerpSpeed * 0.9f);
+                
+                if (Vector2.Distance(transform.position, objectToFollow.transform.position) > 9) {
+                    state = State.FOLLOW_PLAYER;
+                    OverworldManager.Instance.UnlockPlayer();
+                    spriteHalo.color = new Color(1, 1, 1, 0);
+                }
+
+                break;
             case State.FOLLOW_PLAYER: {
                 if (mustGrabPlayer && Vector2.Distance(transform.position, objectToFollow.position + Vector3.up * heightOffset) < 1f) {
                     state = State.PICK_UP_PLAYER;
