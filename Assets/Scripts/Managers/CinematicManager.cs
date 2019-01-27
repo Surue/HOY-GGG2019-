@@ -26,10 +26,21 @@ public class CinematicManager : MonoBehaviour
     [FMODUnity.EventRef] public string youRelax;
     [FMODUnity.EventRef] public string youWork;
     [FMODUnity.EventRef] public string youWeird;
+    [FMODUnity.EventRef] public string youWeeeee;
+
+    Animator animator;
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         skeleton = animation.GetComponent<SkeletonGraphic>();
+    }
+
+    public void Update()
+    {
+        if (Input.GetButtonDown("Fire1")) {
+            animator.PlayInFixedTime("1", 0, 10);
+        }
     }
 
     public void SetSprite(ChoiceMaker.Choice choice)
@@ -78,6 +89,11 @@ public class CinematicManager : MonoBehaviour
     public void PlaySoundMmmmmh()
     {
         SoundManager.Instance.PlaySingle(youMmmmh, transform.position);
+    }
+
+    public void PlaySoundWeeee()
+    {
+        SoundManager.Instance.PlaySingle(youWeeeee, transform.position, false, GameObject.Find("Image(6)"));
     }
 
     public void PlaySoundDesire()

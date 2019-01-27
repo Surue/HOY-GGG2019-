@@ -1346,6 +1346,7 @@ MonoBehaviour:
   youRelax: event:/You/cosy
   youWork: event:/You/worksapce
   youWeird: event:/You/strange
+  youWeeeee: event:/You/wooooo
 --- !u!4 &1304509957
 Transform:
   m_ObjectHideFlags: 0
