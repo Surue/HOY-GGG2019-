@@ -26,7 +26,7 @@ public class PlacementGrid : MonoBehaviour
     List<GameObject> placedObjects;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (!defaultShowGrid) {
             materialLines = null;

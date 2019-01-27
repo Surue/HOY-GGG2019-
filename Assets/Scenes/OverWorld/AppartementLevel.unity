@@ -1710,7 +1710,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127512c083dce5d4c9125d2eef775f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dynamicText: {fileID: 0}
   player: {fileID: 436091972}
   spaceship: {fileID: 57563526}
   cameraOverworld: {fileID: 493017768}
@@ -2157,30 +2156,6 @@ PrefabInstance:
       propertyPath: imageLoaded
       value: 
       objectReference: {fileID: 1496122727}
-    - target: {fileID: 3236982037575480703, guid: 6ca11bbc37741c24db998ee28b794a42,
-        type: 3}
-      propertyPath: loaded0
-      value: 
-      objectReference: {fileID: 21300000, guid: 45d7283c3ef6adc4f93d3e55ebe7362c,
-        type: 3}
-    - target: {fileID: 3236982037575480703, guid: 6ca11bbc37741c24db998ee28b794a42,
-        type: 3}
-      propertyPath: loaded33
-      value: 
-      objectReference: {fileID: 21300000, guid: cab56f7095c1cc942ac6fc29ef127bb2,
-        type: 3}
-    - target: {fileID: 3236982037575480703, guid: 6ca11bbc37741c24db998ee28b794a42,
-        type: 3}
-      propertyPath: loaded66
-      value: 
-      objectReference: {fileID: 21300000, guid: ca7ba411588147a43bf3e902e624f9f3,
-        type: 3}
-    - target: {fileID: 3236982037575480703, guid: 6ca11bbc37741c24db998ee28b794a42,
-        type: 3}
-      propertyPath: loaded100
-      value: 
-      objectReference: {fileID: 21300000, guid: 9f6faa6fe744ced47ae007101e454eda,
-        type: 3}
     - target: {fileID: 372659067534080101, guid: 6ca11bbc37741c24db998ee28b794a42,
         type: 3}
       propertyPath: m_LocalPosition.x
