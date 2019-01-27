@@ -1875,6 +1875,12 @@ PrefabInstance:
       propertyPath: m_inputSource
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6616004838128150687, guid: bb8728418d8f0304c9ec2a290411b7c2,
+        type: 3}
+      propertyPath: pickableObjectData
+      value: 
+      objectReference: {fileID: 11400000, guid: ecc88c78e50bdc64ab2c2b2b8bcc6ffa,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8728418d8f0304c9ec2a290411b7c2, type: 3}
 --- !u!1 &623632940
@@ -2010,6 +2016,12 @@ PrefabInstance:
       propertyPath: m_inputSource
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6616004838128150687, guid: bb8728418d8f0304c9ec2a290411b7c2,
+        type: 3}
+      propertyPath: pickableObjectData
+      value: 
+      objectReference: {fileID: 11400000, guid: 2ba98d747b951214a9ad2e1c008ced2d,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8728418d8f0304c9ec2a290411b7c2, type: 3}
 --- !u!1001 &731244744
@@ -2094,6 +2106,12 @@ PrefabInstance:
       propertyPath: m_inputSource
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6616004838128150687, guid: bb8728418d8f0304c9ec2a290411b7c2,
+        type: 3}
+      propertyPath: pickableObjectData
+      value: 
+      objectReference: {fileID: 11400000, guid: 476c05097632c3440aa54ff036e7b775,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8728418d8f0304c9ec2a290411b7c2, type: 3}
 --- !u!1001 &975650158
