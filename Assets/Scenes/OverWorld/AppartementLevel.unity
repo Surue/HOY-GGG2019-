@@ -2161,6 +2161,11 @@ PrefabInstance:
       propertyPath: imageLoaded
       value: 
       objectReference: {fileID: 1496122727}
+    - target: {fileID: 3236982037575480703, guid: 6ca11bbc37741c24db998ee28b794a42,
+        type: 3}
+      propertyPath: youWeeee
+      value: event:/You/wooooo
+      objectReference: {fileID: 0}
     - target: {fileID: 372659067534080101, guid: 6ca11bbc37741c24db998ee28b794a42,
         type: 3}
       propertyPath: m_LocalPosition.x

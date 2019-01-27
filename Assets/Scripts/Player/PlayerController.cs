@@ -18,7 +18,10 @@ public class PlayerController : MonoBehaviour
 
     float timeLock = -1;
 
+    [Header("Sounds")]
     [FMODUnity.EventRef] public string pickUp;
+    [FMODUnity.EventRef] public string youHoy;
+
 
     void Awake()
     {
@@ -102,6 +105,7 @@ public class PlayerController : MonoBehaviour
         Lock(0.75f);
         skeleton.loop = false;
         skeleton.AnimationName = "take_object";
+        SoundManager.Instance.PlaySingle(youHoy, transform.position, true);
     }
 
     public void Lock(float time = -1)
