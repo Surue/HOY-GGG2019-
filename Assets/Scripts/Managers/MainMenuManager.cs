@@ -45,8 +45,8 @@ public class MainMenuManager : GameManager
             case State.IDLE:
                 break;
             case State.MOVE_LEFT:
-                panelCredits.localPosition += Vector3.left * speedSwitchPanel;
-                panelMain.localPosition += Vector3.left * speedSwitchPanel;
+                panelCredits.localPosition += Vector3.left * Time.deltaTime * speedSwitchPanel;
+                panelMain.localPosition += Vector3.left * Time.deltaTime * speedSwitchPanel;
 
                 if (panelCredits.localPosition.x <= 0) {
                     panelCredits.localPosition = new Vector3(0, panelCredits.localPosition.y);
@@ -55,8 +55,8 @@ public class MainMenuManager : GameManager
                 }
                 break;
             case State.MOVE_RIGHT:
-                panelCredits.position += Vector3.right * speedSwitchPanel;
-                panelMain.position += Vector3.right * speedSwitchPanel;
+                panelCredits.localPosition += Vector3.right * Time.deltaTime * speedSwitchPanel;
+                panelMain.localPosition += Vector3.right * Time.deltaTime * speedSwitchPanel;
 
                 if(panelMain.localPosition.x >= 0) {
                     panelCredits.localPosition = new Vector3(1920, panelCredits.localPosition.y);

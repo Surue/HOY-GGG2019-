@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using Spine.Unity;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using WaitForSeconds = UnityEngine.WaitForSeconds;
 
@@ -26,6 +28,11 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D body;
     Vector2 movementDirection;
     Collider2D boxCollider;
+
+    [Header("Raycast UI")]
+    [SerializeField] GraphicRaycaster m_Raycaster;
+    PointerEventData m_PointerEventData;
+    [SerializeField] EventSystem m_EventSystem;
 
     bool movementLock = false;
 
@@ -90,7 +97,16 @@ public class PlayerController : MonoBehaviour
         UpdateAnimation();
 
         if (Input.GetButtonDown("Fire1")) {
-            OverworldManager.Instance.GrabObject();
+            //Raycast to check if hit the UI
+            m_PointerEventData = new PointerEventData(m_EventSystem) { position = Input.mousePosition };
+
+            List<RaycastResult> results = new List<RaycastResult>();
+
+            m_Raycaster.Raycast(m_PointerEventData, results);
+
+            if (results.Count <= 0) {
+                OverworldManager.Instance.GrabObject();
+            }
         }
     }
 

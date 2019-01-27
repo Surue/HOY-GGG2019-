@@ -53,4 +53,9 @@ public class MusicManager : MonoBehaviour
             isPlayingMusicGame = true;
         }
     }
+
+    public void StopMusic()
+    {
+        eventSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
 }

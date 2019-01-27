@@ -95,4 +95,10 @@ public class OverworldManager : GameManager
     {
         cameraOverworld.Follow = t;
     }
+
+    public void ExitLevel()
+    {
+        spaceship.MustGrabPlayer();
+        Debug.Log("Exit level");
+    }
 }

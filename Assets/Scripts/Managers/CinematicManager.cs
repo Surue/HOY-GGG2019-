@@ -39,6 +39,7 @@ public class CinematicManager : MonoBehaviour
     public void Update()
     {
         if (Input.GetButtonDown("Fire1")) {
+            if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime < (1 / 23.0f) * 10)
             animator.PlayInFixedTime("1", 0, 10);
         }
     }

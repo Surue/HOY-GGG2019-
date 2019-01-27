@@ -15,7 +15,9 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: c963d48c92e84f34aaa70811e0565cb5, type: 3}
   size: {x: 2, y: 1}
   isPlaced: 0
-  tileTaken: []
+  tileTaken:
+  - {x: 3, y: 7}
+  - {x: 4, y: 7}
   FunAmout: 3
   RelaxingAmout: 2
   WeirdAmout: 0

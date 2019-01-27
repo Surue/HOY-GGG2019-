@@ -3791,6 +3791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d9175869a2fb4849942f7e1ba318412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 1870603958}
   panelUp: {fileID: 1926718795}
   panelDown: {fileID: 1558810665}
 --- !u!4 &1774456576

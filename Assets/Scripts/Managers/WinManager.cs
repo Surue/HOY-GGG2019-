@@ -276,6 +276,7 @@ public class WinManager : MonoBehaviour
                     buttonPlayAgain.SetActive(true);
                     buttonQuit.SetActive(true);
                     imageLike.gameObject.SetActive(false);
+                    MusicManager.Instance.StopMusic();
 
                     if (hasWin) {
                         imageDynamic.sprite = winSprite;

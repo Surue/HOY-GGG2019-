@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class InventoryInterface : MonoBehaviour
 {
+    [SerializeField] Button button;
+
     [SerializeField] RectTransform panelUp;
     Image[] imageUp;
     [SerializeField] RectTransform panelDown;
@@ -16,6 +18,13 @@ public class InventoryInterface : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Disable button
+        if (button != null) {
+            if (InventoryManager.Instance.pickedUpObject.Count >= 15) {
+                button.interactable = false;
+            }
+        }
+
         //Get images
         if (panelUp) {
             imageUp = panelUp.GetComponentsInChildren<UIObjectSelection>()
