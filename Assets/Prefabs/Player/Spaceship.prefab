@@ -140,6 +140,7 @@ MonoBehaviour:
   loaded100: {fileID: 21300000, guid: 9f6faa6fe744ced47ae007101e454eda, type: 3}
   imageLoaded: {fileID: 0}
   laserSound: event:/Action/Laser
+  youWeeee: event:/You/wooooo
   timeFlyAway: 3
 --- !u!114 &1744618512
 MonoBehaviour:
