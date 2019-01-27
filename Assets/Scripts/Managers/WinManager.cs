@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using Spine.Unity;
 using UnityEditorInternal;
 using UnityEngine;
@@ -9,6 +10,26 @@ public class WinManager : MonoBehaviour
 {
     [SerializeField] GameObject player;
     SkeletonAnimation skeleton;
+
+    enum State {
+        WAIT_FOR_RESULT,
+        WIN,
+        LOSE
+    }
+
+    [SerializeField] float timerWait = 5;
+    [Header("Sounds")]
+    [FMODUnity.EventRef] public string drumRoll;
+    [FMODUnity.EventRef] public string lose;
+    [FMODUnity.EventRef] public string win;
+    [Header("Camera")]
+    [SerializeField] CinemachineVirtualCamera cameraCinemanchine;
+
+    [SerializeField] float speedZoomIn = 1;
+
+    State state = State.WAIT_FOR_RESULT;
+
+    bool hasWin = false;
 
     // Start is called before the first frame update
     void Start()
@@ -51,8 +72,6 @@ public class WinManager : MonoBehaviour
             valueFood += pickableObjectData.FoodAmout;
             valueWork += pickableObjectData.WorkAmout;
         }
-
-        bool hasWin = false;
 
         switch (ChoiceMaker.FinalChoice) {
             case ChoiceMaker.Choice.FUN: {
@@ -221,10 +240,35 @@ public class WinManager : MonoBehaviour
                 throw new ArgumentOutOfRangeException();
         }
 
-        if (hasWin) {
-            Debug.Log("has win");
-        } else {
-            Debug.Log("has lose");
+        //Play sound
+        SoundManager.Instance.PlaySingle(drumRoll, transform.position);
+    }
+
+    void Update()
+    {
+        switch (state) {
+            case State.WAIT_FOR_RESULT:
+                if (timerWait < 0) {
+                    if (hasWin) {
+                        state = State.WIN;
+                        SoundManager.Instance.PlaySingle(win, transform.position);
+                        skeleton.AnimationName = "happy";
+                    } else {
+                        state = State.LOSE;
+                        SoundManager.Instance.PlaySingle(lose, transform.position);
+                        skeleton.AnimationName = "sad";
+                    }
+                } else {
+                    cameraCinemanchine.m_Lens.OrthographicSize -= Time.deltaTime * speedZoomIn;
+                    timerWait -= Time.deltaTime;
+                }
+                break;
+            case State.WIN:
+                break;
+            case State.LOSE:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 }

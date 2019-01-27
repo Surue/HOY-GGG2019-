@@ -20,7 +20,7 @@ public class ChoiceMaker : MonoBehaviour
         LENGHT
     }
 
-    Choice choice;
+    Choice choice = Choice.FUN;
 
     public static Choice FinalChoice => Instance.choice;
 
