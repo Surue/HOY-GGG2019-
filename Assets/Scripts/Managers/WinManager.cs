@@ -306,7 +306,6 @@ public class WinManager : MonoBehaviour
 
     void OnDestroy()
     {
-        Debug.Log("Destroy");
         victoryMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 }

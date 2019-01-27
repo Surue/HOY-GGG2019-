@@ -25,7 +25,11 @@ public class ChoiceMaker : MonoBehaviour
     public static Choice FinalChoice => Instance.choice;
 
     protected void Awake() {
-        _instance = this;
+        if(_instance == null) {
+            _instance = this;
+        } else if(_instance != this) {
+            Destroy(gameObject);
+        }
     }
 
     // Start is called before the first frame update
@@ -51,6 +55,8 @@ public class ChoiceMaker : MonoBehaviour
         if (scene.name == "IntroCinematic") {
             choice = (Choice)Random.Range(0, (int)Choice.LENGHT);
             FindObjectOfType<CinematicManager>().SetSprite(choice);
+
+            InventoryManager.Instance.CleanMemory();
         }
     }
 }

@@ -49,6 +49,8 @@ public class OverworldManager : GameManager
             pickableObject.Grab();
             player.PlayGrabAnimation();
 
+            pickableObject = null;
+
             grabbedObject++;
 
             if (grabbedObject == MAXIMUM_OBJECT_ON_SPACESHIP) {
@@ -63,6 +65,7 @@ public class OverworldManager : GameManager
 
     public void SetPickableObject(PickableObject o)
     {
+        if(!InventoryManager.Instance.pickedUpObject.Contains(o.pickableObjectData))
         pickableObject = o;
     }
 

@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.PlayerLoop;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -52,6 +50,19 @@ public class InventoryManager : MonoBehaviour
     public void PlaceObjectOnGrid(PickableObjectData d)
     {
         FindObjectOfType<PlacementGrid>().PlaceObjectOnGrid(d);
+    }
+
+    public void CleanMemory()
+    {
+        if (pickedUpObject != null) {
+
+            foreach (PickableObjectData pickableObjectData in pickedUpObject) {
+                pickableObjectData.isPlaced = false;
+                pickableObjectData.tileTaken = new List<Vector2Int>();
+            }
+        }
+
+        pickedUpObject.Clear();
     }
 
     public void RemoveObjectAt(Vector2Int pos)

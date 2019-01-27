@@ -92,7 +92,7 @@ public class Spaceship : MonoBehaviour
                     objectToFollow.transform.position.y + heightOffset);
                 transform.position = Vector2.Lerp(transform.position, desiredPosition, Time.deltaTime * lerpSpeed);
 
-                if (objectsToGrab.Count > 0) {
+                if (objectsToGrab.Count > 0 && objectsToGrab[0]!= null) {
                     state = State.GOES_TO_OBJECT;
                     objectToFollow = objectsToGrab[0].transform;
                     objectsToGrab.RemoveAt(0);

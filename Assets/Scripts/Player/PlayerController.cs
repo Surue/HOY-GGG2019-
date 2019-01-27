@@ -1,10 +1,23 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Spine.Unity;
 using UnityEngine;
+using UnityEngine.UI;
 using WaitForSeconds = UnityEngine.WaitForSeconds;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Canvas")]
+    [SerializeField] GameObject bubble;
+    [SerializeField] Image imageChoice;
+    [SerializeField] Sprite spriteFun;
+    [SerializeField] Sprite spriteRelax;
+    [SerializeField] Sprite spriteWeird;
+    [SerializeField] Sprite spriteClean;
+    [SerializeField] Sprite spriteFood;
+    [SerializeField] Sprite spriteWork;
+
+    [Header("Movements")]
     //Movements
     [SerializeField] float movementSpeed;
 
@@ -21,12 +34,39 @@ public class PlayerController : MonoBehaviour
     [Header("Sounds")]
     [FMODUnity.EventRef] public string youHoy;
 
+    bool mouseOver = false;
 
     void Awake()
     {
         skeleton = GetComponentInChildren<SkeletonAnimation>();
         body = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<CapsuleCollider2D>();
+    }
+
+    void Start()
+    {
+        switch (ChoiceMaker.FinalChoice) {
+            case ChoiceMaker.Choice.FUN:
+                imageChoice.sprite = spriteFun;
+                break;
+            case ChoiceMaker.Choice.RELAX:
+                imageChoice.sprite = spriteRelax;
+                break;
+            case ChoiceMaker.Choice.WEIRD:
+                imageChoice.sprite = spriteWeird;
+                break;
+            case ChoiceMaker.Choice.CLEAN:
+                imageChoice.sprite = spriteClean;
+                break;
+            case ChoiceMaker.Choice.FOOD:
+                imageChoice.sprite = spriteFood;
+                break;
+            case ChoiceMaker.Choice.WORK:
+                imageChoice.sprite = spriteWork;
+                break;
+        }
+
+        bubble.gameObject.SetActive(false);
     }
     
     void Update()
@@ -54,11 +94,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void OnMouseOver()
+    {
+        mouseOver = true;
+    }
+
     void FixedUpdate()
     {
         //Movement
         body.velocity = movementDirection * movementSpeed;
         movementDirection = Vector2.zero;
+
+        if(mouseOver) {
+            bubble.gameObject.SetActive(true);
+            mouseOver = false;
+        } else {
+            bubble.gameObject.SetActive(false);
+        }
     }
 
     void UpdateAnimation()
