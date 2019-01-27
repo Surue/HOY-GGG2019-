@@ -266,9 +266,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1505646974}
   timerWait: 3.5
-  drumRoll: event:/DrumRoll
-  lose: event:/Lose
-  win: event:/Victory
+  drumRoll: event:/Action/DrumRoll
+  lose: event:/Action/Lose
+  win: event:/Action/Victory
   cameraCinemanchine: {fileID: 1668764151}
   speedZoomIn: 2
 --- !u!1 &702725645
@@ -549,8 +549,8 @@ MonoBehaviour:
   m_Raycaster: {fileID: 1420471194}
   m_EventSystem: {fileID: 214477134}
   defaultShowGrid: 0
-  pickUp: event:/PickUp
-  dropObject: event:/DropObject
+  pickUp: event:/Action/PickUp
+  dropObject: event:/Action/DropObject
 --- !u!4 &1072475466
 Transform:
   m_ObjectHideFlags: 0
@@ -1895,6 +1895,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d2610b7b51fb9147ad0af235796a6ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundHover0: 
+  soundHover1: 
+  soundHover2: 
+  soundHover3: 
+  soundHover4: 
 --- !u!4 &1374378201
 Transform:
   m_ObjectHideFlags: 0

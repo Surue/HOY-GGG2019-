@@ -139,7 +139,7 @@ MonoBehaviour:
   loaded66: {fileID: 21300000, guid: ca7ba411588147a43bf3e902e624f9f3, type: 3}
   loaded100: {fileID: 21300000, guid: 9f6faa6fe744ced47ae007101e454eda, type: 3}
   imageLoaded: {fileID: 0}
-  laserSound: event:/Laser
+  laserSound: event:/Action/Laser
   timeFlyAway: 3
 --- !u!114 &1744618512
 MonoBehaviour:
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: event:/Spaceship
+  Event: event:/Action/Spaceship
   PlayEvent: 1
   StopEvent: 2
   CollisionTag: 

@@ -26,7 +26,9 @@ public class Spaceship : MonoBehaviour
     [SerializeField] Sprite loaded100;
     [SerializeField] Image imageLoaded;
 
+    [Header("Sounds")]
     [FMODUnity.EventRef] public string laserSound;
+    [FMODUnity.EventRef] public string youWeeee;
 
     List<PickableObject> objectsToGrab;
 
@@ -157,6 +159,7 @@ public class Spaceship : MonoBehaviour
                 if(Vector2.Distance(transform.position, objectToFollow.position) < 1f) {
                     state = State.FLY_AWAY;
                     OverworldManager.Instance.CameraSetObjectToFollow(transform);
+                    SoundManager.Instance.PlaySingle(youWeeee, transform.position, true);
                     spriteSpaceship.sprite = spriteSpaceshipFull;
                     objectToFollow.parent = transform;
                     spriteHalo.color = new Color(1, 1, 1, 0);
