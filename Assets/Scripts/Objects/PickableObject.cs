@@ -9,6 +9,9 @@ public class PickableObject : MonoBehaviour
 
     [SerializeField] Image dynamicImage;
 
+    [Header("Sounds")]
+    [FMODUnity.EventRef] public string grabSound;
+
     bool playerCanGrab = false;
     bool grabbed = false;
 
@@ -65,5 +68,12 @@ public class PickableObject : MonoBehaviour
     {
         dynamicImage.color = new Color(0, 0, 0, 0);
         grabbed = true;
+
+    }
+
+    public void PlaySound()
+    {
+        if(grabSound != "")
+        SoundManager.Instance.PlaySingle(grabSound, transform.position);
     }
 }

@@ -103,7 +103,7 @@ public class Spaceship : MonoBehaviour
                 if (Vector2.Distance(transform.position, objectToFollow.position + Vector3.up * heightOffset) < 1f) {
                     state = State.PICK_UP_OBJECT;
                     spriteHalo.color = new Color(1, 1, 1, 0.9f);
-                        
+                    objectToFollow.GetComponent<PickableObject>().PlaySound();
                     SoundManager.Instance.PlaySingle(laserSound, transform.position, true);
 
                     if (objectToFollow.gameObject.GetComponents<Collider2D>().Length > 0) {
