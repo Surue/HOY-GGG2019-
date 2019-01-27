@@ -406,6 +406,8 @@ MonoBehaviour:
   m_Raycaster: {fileID: 1420471194}
   m_EventSystem: {fileID: 214477134}
   defaultShowGrid: 0
+  pickUp: event:/PickUp
+  dropObject: event:/DropObject
 --- !u!4 &1072475466
 Transform:
   m_ObjectHideFlags: 0

@@ -25,6 +25,9 @@ public class PlacementGrid : MonoBehaviour
 
     List<GameObject> placedObjects;
 
+    [FMODUnity.EventRef] public string pickUp;
+    [FMODUnity.EventRef] public string dropObject;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -172,6 +175,7 @@ public class PlacementGrid : MonoBehaviour
             if (Input.GetButtonDown("Fire2")) {
                 if (gridBools[indexX, indexY]) {
                     InventoryManager.Instance.RemoveObjectAt(new Vector2Int(indexX, indexY));
+                    SoundManager.Instance.PlaySingle(pickUp, transform.position, true);
                 }
             }
         }
@@ -257,6 +261,7 @@ public class PlacementGrid : MonoBehaviour
 
         InventoryManager.Instance.selectedObjectForPlacement.pickableObjectData.isPlaced = true;
         InventoryManager.Instance.ObjectPlaced();
+        SoundManager.Instance.PlaySingle(dropObject, transform.position, true);
     }
 
     public void PlaceObjectOnGrid(PickableObjectData data)
