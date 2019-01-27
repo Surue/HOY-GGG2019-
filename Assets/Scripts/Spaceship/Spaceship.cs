@@ -15,6 +15,8 @@ public class Spaceship : MonoBehaviour
     [SerializeField] float speedPickUp = 5;
     [SerializeField] Sprite spriteSpaceshipFull;
     [SerializeField] SpriteRenderer spriteSpaceship;
+    [SerializeField] float speedWiggle = 2;
+    [SerializeField] float amountWiggle = 3;
 
     [Header("Sprite")]
     [SerializeField] Sprite loaded0;
@@ -120,14 +122,20 @@ public class Spaceship : MonoBehaviour
                     switch (objectGrabbed) {
                         case 1:
                             imageLoaded.sprite = loaded33;
+                            heightOffset -= 1;
+                            speedWiggle = 10;
                             break;
 
                         case 2:
                             imageLoaded.sprite = loaded66;
+                            heightOffset -= 1;
+                            speedWiggle = 25;
                             break;
 
                         case 3:
                             imageLoaded.sprite = loaded100;
+                            heightOffset -= 1;
+                            speedWiggle = 50;
                             break;
                     }
 
@@ -164,6 +172,8 @@ public class Spaceship : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
+
+        spriteSpaceship.transform.eulerAngles = new Vector3(0, 0, Mathf.Sin(Time.time * speedWiggle) * amountWiggle);
     }
 
     public void GrabObject(PickableObject o)
