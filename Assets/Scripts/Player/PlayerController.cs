@@ -1,9 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using Spine.Unity;
 using UnityEngine;
-using UnityEngine.Experimental.PlayerLoop;
 using WaitForSeconds = UnityEngine.WaitForSeconds;
 
 public class PlayerController : MonoBehaviour
@@ -20,6 +17,8 @@ public class PlayerController : MonoBehaviour
     bool movementLock = false;
 
     float timeLock = -1;
+
+    [FMODUnity.EventRef] public string pickUp;
 
     void Awake()
     {
@@ -50,6 +49,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1")) {
             OverworldManager.Instance.GrabObject();
+            SoundManager.Instance.PlaySingle(pickUp, transform.position, true);
         }
     }
 

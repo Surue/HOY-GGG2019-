@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{c439b65b-6d44-46a6-b8dc-811a6f26ca78}">
+        <property name="assetPath">
+            <value>Ufo.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>48</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>8</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{ad2a6d7b-665b-47f8-a3e0-d4cca742ab14}</destination>
+        </relationship>
+    </object>
+</objects>

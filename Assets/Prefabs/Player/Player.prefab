@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
+  pickUp: event:/PickUp
 --- !u!50 &300872875024754061
 Rigidbody2D:
   serializedVersion: 4

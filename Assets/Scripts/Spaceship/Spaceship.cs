@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Spine.Unity;
 using UnityEngine;
 using UnityEngine.UI;
+using FMOD.Studio;
 
 public class Spaceship : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class Spaceship : MonoBehaviour
     [SerializeField] Sprite loaded66;
     [SerializeField] Sprite loaded100;
     [SerializeField] Image imageLoaded;
+
+    [FMODUnity.EventRef] public string laserSound;
 
     List<PickableObject> objectsToGrab;
 
@@ -79,6 +82,7 @@ public class Spaceship : MonoBehaviour
                 if (mustGrabPlayer && Vector2.Distance(transform.position, objectToFollow.position + Vector3.up * heightOffset) < 1f) {
                     state = State.PICK_UP_PLAYER;
                     spriteHalo.color = new Color(1, 1, 1, 0.9f);
+                    SoundManager.Instance.PlaySingle(laserSound, transform.position, true);
                     OverworldManager.Instance.LockPlayer();
                 }
 
@@ -97,6 +101,9 @@ public class Spaceship : MonoBehaviour
                 if (Vector2.Distance(transform.position, objectToFollow.position + Vector3.up * heightOffset) < 1f) {
                     state = State.PICK_UP_OBJECT;
                     spriteHalo.color = new Color(1, 1, 1, 0.9f);
+                        
+                    SoundManager.Instance.PlaySingle(laserSound, transform.position, true);
+
                     if (objectToFollow.gameObject.GetComponents<Collider2D>().Length > 0) {
                         foreach (Collider2D component in objectToFollow.GetComponents<Collider2D>()) {
                             component.enabled = false;
