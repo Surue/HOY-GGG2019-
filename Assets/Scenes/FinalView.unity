@@ -269,6 +269,8 @@ MonoBehaviour:
   drumRoll: event:/Action/DrumRoll
   lose: event:/Action/Lose
   win: event:/Action/Victory
+  youVictory: event:/You/victory
+  youDefeate: event:/You/defeat
   cameraCinemanchine: {fileID: 1668764151}
   speedZoomIn: 2
 --- !u!1 &702725645

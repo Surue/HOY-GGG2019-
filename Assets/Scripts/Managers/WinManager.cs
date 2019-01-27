@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using FMOD.Studio;
 using Spine.Unity;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class WinManager : MonoBehaviour
@@ -22,6 +21,10 @@ public class WinManager : MonoBehaviour
     [FMODUnity.EventRef] public string drumRoll;
     [FMODUnity.EventRef] public string lose;
     [FMODUnity.EventRef] public string win;
+    [FMODUnity.EventRef] public string youVictory;
+    [FMODUnity.EventRef] public string youDefeate;
+
+    EventInstance victoryMusic;
     [Header("Camera")]
     [SerializeField] CinemachineVirtualCamera cameraCinemanchine;
 
@@ -29,7 +32,7 @@ public class WinManager : MonoBehaviour
 
     State state = State.WAIT_FOR_RESULT;
 
-    bool hasWin = false;
+    bool hasWin = true;
 
     // Start is called before the first frame update
     void Start()
@@ -251,11 +254,13 @@ public class WinManager : MonoBehaviour
                 if (timerWait < 0) {
                     if (hasWin) {
                         state = State.WIN;
-                        SoundManager.Instance.PlaySingle(win, transform.position);
+                        victoryMusic = SoundManager.Instance.PlaySingle(win, transform.position);
+                        SoundManager.Instance.PlaySingle(youVictory, transform.position);
                         skeleton.AnimationName = "happy";
                     } else {
                         state = State.LOSE;
                         SoundManager.Instance.PlaySingle(lose, transform.position);
+                        SoundManager.Instance.PlaySingle(youDefeate, transform.position);
                         skeleton.AnimationName = "sad";
                     }
                 } else {
@@ -270,5 +275,11 @@ public class WinManager : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
+    }
+
+    void OnDestroy()
+    {
+        Debug.Log("Destroy");
+        victoryMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 }
