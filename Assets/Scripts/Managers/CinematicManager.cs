@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Spine;
 using Spine.Unity;
-using Spine.Unity.Editor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -21,6 +17,15 @@ public class CinematicManager : MonoBehaviour
     [SerializeField] Sprite spriteFood;
     [SerializeField] Sprite spriteWork;
     [SerializeField] string nextSceneName;
+    [Header("Sounds")]
+    [FMODUnity.EventRef] public string youIWant;
+    [FMODUnity.EventRef] public string youMmmmh;
+    [FMODUnity.EventRef] public string youFood;
+    [FMODUnity.EventRef] public string youClean;
+    [FMODUnity.EventRef] public string youFun;
+    [FMODUnity.EventRef] public string youRelax;
+    [FMODUnity.EventRef] public string youWork;
+    [FMODUnity.EventRef] public string youWeird;
 
     void Start()
     {
@@ -63,5 +68,41 @@ public class CinematicManager : MonoBehaviour
     public void LoadNextScene()
     {
         SceneManager.LoadScene(nextSceneName);
+    }
+
+    public void PlaySoundIWant()
+    {
+        SoundManager.Instance.PlaySingle(youIWant, transform.position);
+    }
+
+    public void PlaySoundMmmmmh()
+    {
+        SoundManager.Instance.PlaySingle(youMmmmh, transform.position);
+    }
+
+    public void PlaySoundDesire()
+    {
+        switch(ChoiceMaker.FinalChoice) {
+            case ChoiceMaker.Choice.FUN:
+                SoundManager.Instance.PlaySingle(youFun, transform.position);
+                break;
+            case ChoiceMaker.Choice.RELAX:
+                SoundManager.Instance.PlaySingle(youRelax, transform.position);
+                break;
+            case ChoiceMaker.Choice.WEIRD:
+                SoundManager.Instance.PlaySingle(youWeird, transform.position);
+                break;
+            case ChoiceMaker.Choice.CLEAN:
+                SoundManager.Instance.PlaySingle(youClean, transform.position);
+                break;
+            case ChoiceMaker.Choice.FOOD:
+                SoundManager.Instance.PlaySingle(youFood, transform.position);
+                break;
+            case ChoiceMaker.Choice.WORK:
+                SoundManager.Instance.PlaySingle(youWork, transform.position);
+                break;
+            case ChoiceMaker.Choice.LENGHT:
+                break;
+        }
     }
 }
