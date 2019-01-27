@@ -9,6 +9,8 @@ public class OverworldManager : GameManager
     [SerializeField] Spaceship spaceship;
     [SerializeField] CinemachineVirtualCamera cameraOverworld;
 
+    [FMODUnity.EventRef] public string pickUp;
+
     const int MAXIMUM_OBJECT_ON_SPACESHIP = 3;
 
     public static OverworldManager Instance => (OverworldManager)_instance;
@@ -40,6 +42,8 @@ public class OverworldManager : GameManager
     {
         if (pickableObject && grabbedObject < MAXIMUM_OBJECT_ON_SPACESHIP) {
 
+            SoundManager.Instance.PlaySingle(pickUp, transform.position, true);
+
             spaceship.GrabObject(pickableObject);
             InventoryManager.Instance.AddObject(pickableObject.pickableObjectData);
             pickableObject.Grab();
@@ -49,6 +53,10 @@ public class OverworldManager : GameManager
 
             if (grabbedObject == MAXIMUM_OBJECT_ON_SPACESHIP) {
                 spaceship.MustGrabPlayer();
+
+                foreach (PickableObject o in FindObjectsOfType<PickableObject>()) {
+                    o.Grab(); 
+                }
             }
         }
     }

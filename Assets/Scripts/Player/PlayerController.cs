@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     float timeLock = -1;
 
     [Header("Sounds")]
-    [FMODUnity.EventRef] public string pickUp;
     [FMODUnity.EventRef] public string youHoy;
 
 
@@ -52,7 +51,6 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1")) {
             OverworldManager.Instance.GrabObject();
-            SoundManager.Instance.PlaySingle(pickUp, transform.position, true);
         }
     }
 

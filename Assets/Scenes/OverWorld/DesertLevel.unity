@@ -1712,52 +1712,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &321333243
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 321333245}
-  - component: {fileID: 321333244}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &321333244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 321333243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 127512c083dce5d4c9125d2eef775f50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 436091972}
-  spaceship: {fileID: 57563526}
-  cameraOverworld: {fileID: 493017768}
---- !u!4 &321333245
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 321333243}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.817773, y: 1.1025364, z: -0.2734375}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &436091972 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 300872875024754062, guid: 582511e994d7c3e48952d04c8e0405ad,
@@ -2142,6 +2096,90 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8728418d8f0304c9ec2a290411b7c2, type: 3}
+--- !u!1001 &975650158
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 709956693659864176, guid: 1bad86fccfea4b5498c30bb8d6099796,
+        type: 3}
+      propertyPath: m_Name
+      value: OverworldManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 709956693659864182, guid: 1bad86fccfea4b5498c30bb8d6099796,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.817773
+      objectReference: {fileID: 0}
+    - target: {fileID: 709956693659864182, guid: 1bad86fccfea4b5498c30bb8d6099796,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.1025364
+      objectReference: {fileID: 0}
+    - target: {fileID: 709956693659864182, guid: 1bad86fccfea4b5498c30bb8d6099796,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.2734375
+      objectReference: {fileID: 0}
+    - target: {fileID: 709956693659864182, guid: 1bad86fccfea4b5498c30bb8d6099796,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 709956693659864182, guid: 1bad86fccfea4b5498c30bb8d6099796,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 709956693659864182, guid: 1bad86fccfea4b5498c30bb8d6099796,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 709956693659864182, guid: 1bad86fccfea4b5498c30bb8d6099796,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 709956693659864182, guid: 1bad86fccfea4b5498c30bb8d6099796,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 709956693659864182, guid: 1bad86fccfea4b5498c30bb8d6099796,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 709956693659864182, guid: 1bad86fccfea4b5498c30bb8d6099796,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 709956693659864182, guid: 1bad86fccfea4b5498c30bb8d6099796,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 709956693659864183, guid: 1bad86fccfea4b5498c30bb8d6099796,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 436091972}
+    - target: {fileID: 709956693659864183, guid: 1bad86fccfea4b5498c30bb8d6099796,
+        type: 3}
+      propertyPath: spaceship
+      value: 
+      objectReference: {fileID: 57563526}
+    - target: {fileID: 709956693659864183, guid: 1bad86fccfea4b5498c30bb8d6099796,
+        type: 3}
+      propertyPath: cameraOverworld
+      value: 
+      objectReference: {fileID: 493017768}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1bad86fccfea4b5498c30bb8d6099796, type: 3}
 --- !u!1 &1069577321
 GameObject:
   m_ObjectHideFlags: 0
