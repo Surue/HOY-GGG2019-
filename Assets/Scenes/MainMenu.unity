@@ -519,14 +519,13 @@ GameObject:
   - component: {fileID: 266338706}
   - component: {fileID: 266338708}
   - component: {fileID: 266338707}
-  - component: {fileID: 266338709}
   m_Layer: 5
   m_Name: Spaceship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &266338706
 RectTransform:
   m_ObjectHideFlags: 0
@@ -583,33 +582,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 266338705}
   m_CullTransparentMesh: 0
---- !u!320 &266338709
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 266338705}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: e419084a010285648aeefcd90576b2a6, type: 2}
-  m_InitialState: 1
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: 114656017893371114, guid: 942e127b3c6ca464ab89f0d2dc534ffa, type: 2}
-    value: {fileID: 1807630826}
-  - key: {fileID: 114312709646860812, guid: 942e127b3c6ca464ab89f0d2dc534ffa, type: 2}
-    value: {fileID: 483666220}
-  - key: {fileID: 114239631389439098, guid: 942e127b3c6ca464ab89f0d2dc534ffa, type: 2}
-    value: {fileID: 983613109}
-  - key: {fileID: 114544343031738290, guid: 942e127b3c6ca464ab89f0d2dc534ffa, type: 2}
-    value: {fileID: 116094152}
-  - key: {fileID: 114889720178977490, guid: 942e127b3c6ca464ab89f0d2dc534ffa, type: 2}
-    value: {fileID: 0}
-  m_ExposedReferences:
-    m_References: []
 --- !u!1 &483666220
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,6 +888,95 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &935504410
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 935504411}
+  - component: {fileID: 935504414}
+  - component: {fileID: 935504413}
+  - component: {fileID: 935504412}
+  m_Layer: 5
+  m_Name: SpaceshipWiggle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &935504411
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935504410}
+  m_LocalRotation: {x: -0, y: -0, z: 0.2217029, w: 0.97511435}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 952235125}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 25.618002}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -694, y: 304.15}
+  m_SizeDelta: {x: 474.67, y: 287.9}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &935504412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935504410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: def4126661048af4aa0d32d820a16932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedWiggle: 2
+  amountWiggle: 3
+--- !u!114 &935504413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935504410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 7d15c6cfb07f11a458f575572f2b4cde, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &935504414
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935504410}
+  m_CullTransparentMesh: 0
 --- !u!1 &952235124
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,6 +1013,7 @@ RectTransform:
   - {fileID: 116094153}
   - {fileID: 1372238355}
   - {fileID: 266338706}
+  - {fileID: 935504411}
   m_Father: {fileID: 1518481232}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

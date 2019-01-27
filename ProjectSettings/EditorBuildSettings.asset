@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/OverWorld/JungleLevel.unity
     guid: f854c8e8ed832a044be868ed2d08e6ff
   - enabled: 1
+    path: Assets/Scenes/OverWorld/MountainLevel.unity
+    guid: 7195a47bb3053f040b4a81d4a5727fcc
+  - enabled: 1
     path: Assets/Scenes/FinalView.unity
     guid: 43489f0e1f68ce148a1c90f5d6af9a57
   m_configObjects: {}
