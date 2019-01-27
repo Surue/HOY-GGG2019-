@@ -4,9 +4,24 @@ using Cinemachine;
 using FMOD.Studio;
 using Spine.Unity;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WinManager : MonoBehaviour
 {
+    [Header("narrator")]
+    [SerializeField] Image imageLike;
+
+    [Header("Win / Lose image")]
+    [SerializeField] Image imageDynamic;
+    [SerializeField] Image imageBubble;
+
+    [SerializeField] Sprite winSprite;
+    [SerializeField] Sprite loseSprite;
+
+    [Header("button")]
+    [SerializeField] GameObject buttonPlayAgain;
+    [SerializeField] GameObject buttonQuit;
+
     [SerializeField] GameObject player;
     SkeletonAnimation skeleton;
 
@@ -32,11 +47,16 @@ public class WinManager : MonoBehaviour
 
     State state = State.WAIT_FOR_RESULT;
 
-    bool hasWin = true;
+    bool hasWin = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        buttonPlayAgain.SetActive(false);
+        buttonQuit.SetActive(false);
+        
+        imageBubble.gameObject.SetActive(false);
+
         //Place a correct position
         skeleton = player.GetComponent<SkeletonAnimation>();
 
@@ -252,12 +272,19 @@ public class WinManager : MonoBehaviour
         switch (state) {
             case State.WAIT_FOR_RESULT:
                 if (timerWait < 0) {
+                    imageBubble.gameObject.SetActive(true);
+                    buttonPlayAgain.SetActive(true);
+                    buttonQuit.SetActive(true);
+                    imageLike.gameObject.SetActive(false);
+
                     if (hasWin) {
+                        imageDynamic.sprite = winSprite;
                         state = State.WIN;
                         victoryMusic = SoundManager.Instance.PlaySingle(win, transform.position);
                         SoundManager.Instance.PlaySingle(youVictory, transform.position);
                         skeleton.AnimationName = "happy";
                     } else {
+                        imageDynamic.sprite = loseSprite;
                         state = State.LOSE;
                         SoundManager.Instance.PlaySingle(lose, transform.position);
                         SoundManager.Instance.PlaySingle(youDefeate, transform.position);

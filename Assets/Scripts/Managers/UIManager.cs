@@ -15,6 +15,11 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
     public void PlayHover(int i)
     {
         switch (i) {
